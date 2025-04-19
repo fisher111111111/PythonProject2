@@ -28,6 +28,7 @@ def change_bug_status(bug_id, new_status):
 if __name__ == "__main__":
 
     bug_id = 1
+
     print("Текущая информация о баге:")
     display_bug_report(bug_id)
 
@@ -35,3 +36,4 @@ if __name__ == "__main__":
 
     print("Обновленная информация о баге:")
     display_bug_report(bug_id)
+

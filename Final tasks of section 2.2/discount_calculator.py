@@ -12,3 +12,4 @@ final_amount_rounded = round(final_amount)
 
 print(f"\nВы экономите: {discount_amount:.2f}")
 print(f"Сумма к оплате (округлено): {final_amount_rounded}")
+

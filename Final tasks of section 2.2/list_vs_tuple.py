@@ -20,6 +20,7 @@ list_numbers.append(6)
 print("Добавленный элемент в список:", list_numbers)
 
 
+
 try:
     raise TypeError("В кортеж нельзя добавить элемент!")
 except TypeError as e:

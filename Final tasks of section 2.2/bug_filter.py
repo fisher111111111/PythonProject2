@@ -1,5 +1,4 @@
 # bug_filter.py
-
 def main():
 
     bug_reports = [
@@ -11,7 +10,6 @@ def main():
         "Ошибка 6 – Low",
         "Ошибка 7 – High"
     ]
-
     priority = input("Введите приоритет для поиска (High, Medium, Low): ").strip().capitalize()
 
     filtered_bugs = [bug for bug in bug_reports if priority in bug]
