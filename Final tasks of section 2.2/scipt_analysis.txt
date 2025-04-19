@@ -1,0 +1,19 @@
+Script analys
+-
+1. basic_info.py
+  - get_project_info(): Возвращает основную информацию о проекте.
+  - get_user_info(user_id): Извлекает основную информацию о пользователе по его идентификатору.
+2. user_profile.py
+  - create_user_profile(data): Принимает данные пользователя и создает новый профиль.
+  - update_user_profile(user_id, data): Обновляет существующий профиль для указанного пользователя.
+  - get_user_profile(user_id): Извлекает детали профиля пользователя.
+3. test_case_stats.py
+  - get_test_case_stats(): Подводит итоги статистики по тестовым случаям (процент успешных/неуспешных тестов).
+  - log_test_result(test_case_id, result): Записывает результат выполнения тестового случая.
+4. bug_reports.py
+  - file_bug_report(data): Отправляет новый отчет о баге.
+  - get_bug_reports(user_id): Извлекает все отчеты о багах, связанные с конкретным пользователем.
+5. bug_details.py
+  - get_bug_details(bug_id): Извлекает детальную информацию о конкретном баге.
+  - update_bug_status(bug_id, status): Обновляет статус отчета о баге.
+
