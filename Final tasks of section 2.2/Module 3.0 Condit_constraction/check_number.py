@@ -7,7 +7,6 @@ def check_number(number):
     else:
         return f"Число {number} отрицательное."
 
-# Примеры вызова функции
 result1 = check_number(8)
 print(result1)
 
