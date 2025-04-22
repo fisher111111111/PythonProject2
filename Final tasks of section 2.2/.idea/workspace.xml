@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ce7753b-b83b-4774-985e-4e1f0480c1cf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Задачи из п.5 раздела 2.2/final task section 2.2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PythonProject/.idea/PythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Practical tasks.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PythonProject/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PythonProject/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PythonProject/.idea/workspace.xml" beforeDir="false" />
+    <list default="true" id="5ce7753b-b83b-4774-985e-4e1f0480c1cf" name="Changes" comment="commmit test_bug_tracker.py">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scipt_analysis" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../My_PythonProject/.idea/My_PythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../My_PythonProject/.idea/My_PythonProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PythonProject" beforeDir="false" afterPath="$PROJECT_DIR$/../PythonProject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Задачи из п.5 раздела 2.2/.idea/My_PythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Задачи из п.5 раздела 2.2/.idea/My_PythonProject.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +27,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo">{
@@ -38,13 +45,24 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Python.age_message.executor&quot;: &quot;Run&quot;,
+    &quot;Python.basic_info.executor&quot;: &quot;Run&quot;,
     &quot;Python.bubble_sort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.bug_details.executor&quot;: &quot;Run&quot;,
+    &quot;Python.bug_filter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.bug_repport.executor&quot;: &quot;Run&quot;,
+    &quot;Python.discount_calculator.executor&quot;: &quot;Run&quot;,
+    &quot;Python.list_vs_tuple.executor&quot;: &quot;Run&quot;,
+    &quot;Python.log_processing.executor&quot;: &quot;Run&quot;,
     &quot;Python.multiplication_table.executor&quot;: &quot;Run&quot;,
     &quot;Python.nested_functions.executor&quot;: &quot;Run&quot;,
     &quot;Python.number_sum.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_bug_tracker.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_case_validation.executor&quot;: &quot;Run&quot;,
     &quot;Python.test_file.executor&quot;: &quot;Run&quot;,
     &quot;Python.triangle_check.executor&quot;: &quot;Run&quot;,
+    &quot;Python.user_profile.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/user/PycharmProjects/Final tasks of section 2.2&quot;
@@ -53,7 +71,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-4f4e415b4190-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.26053.29" />
+        <option value="bundled-python-sdk-348a24fa61fa-5312c7369657-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.23774.444" />
       </set>
     </attachedChunks>
   </component>
@@ -122,7 +140,95 @@
       <option name="project" value="LOCAL" />
       <updated>1744878290593</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="общий коммит">
+      <option name="closed" value="true" />
+      <created>1744881506349</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744881506349</updated>
+    </task>
+    <task id="LOCAL-00009" summary="commmit data_type.txt">
+      <option name="closed" value="true" />
+      <created>1744885327463</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1744885327463</updated>
+    </task>
+    <task id="LOCAL-00010" summary="commmit bug_repport.py">
+      <option name="closed" value="true" />
+      <created>1744886315244</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1744886315244</updated>
+    </task>
+    <task id="LOCAL-00011" summary="commmit bug_filter.py">
+      <option name="closed" value="true" />
+      <created>1745083342321</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1745083342321</updated>
+    </task>
+    <task id="LOCAL-00012" summary="commmit list_vs_tuple.py">
+      <option name="closed" value="true" />
+      <created>1745094443339</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1745094443339</updated>
+    </task>
+    <task id="LOCAL-00013" summary="commmit discount_calculator.py">
+      <option name="closed" value="true" />
+      <created>1745095220536</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1745095220536</updated>
+    </task>
+    <task id="LOCAL-00014" summary="commmit log_processing.py">
+      <option name="closed" value="true" />
+      <created>1745095669408</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1745095669408</updated>
+    </task>
+    <task id="LOCAL-00015" summary="commmit some files">
+      <option name="closed" value="true" />
+      <created>1745095766002</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1745095766002</updated>
+    </task>
+    <task id="LOCAL-00016" summary="commmit script_analysis">
+      <option name="closed" value="true" />
+      <created>1745096923525</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1745096923525</updated>
+    </task>
+    <task id="LOCAL-00017" summary="commmit script_analysis">
+      <option name="closed" value="true" />
+      <created>1745097837138</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1745097837138</updated>
+    </task>
+    <task id="LOCAL-00018" summary="commmit test_bug_tracker.py">
+      <option name="closed" value="true" />
+      <created>1745097875728</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1745097875728</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -133,6 +239,16 @@
     <MESSAGE value="создание файла nested_functions.py" />
     <MESSAGE value="создание файла multiplication_table.py" />
     <MESSAGE value="создание файла bubble_sort.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="создание файла bubble_sort.py" />
+    <MESSAGE value="общий коммит" />
+    <MESSAGE value="commmit data_type.txt" />
+    <MESSAGE value="commmit bug_repport.py" />
+    <MESSAGE value="commmit bug_filter.py" />
+    <MESSAGE value="commmit list_vs_tuple.py" />
+    <MESSAGE value="commmit discount_calculator.py" />
+    <MESSAGE value="commmit log_processing.py" />
+    <MESSAGE value="commmit some files" />
+    <MESSAGE value="commmit script_analysis" />
+    <MESSAGE value="commmit test_bug_tracker.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="commmit test_bug_tracker.py" />
   </component>
 </project>
