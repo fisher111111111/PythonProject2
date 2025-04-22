@@ -5,7 +5,6 @@ def check_string_length(string, length):
     else:
         return f'Длина строки "{string}" слишком короткая.'
 
-# Примеры вызова функции
 result1 = check_string_length("Python", 5)
 print(result1)
 
