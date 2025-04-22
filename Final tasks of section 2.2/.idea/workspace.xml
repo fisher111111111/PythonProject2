@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ce7753b-b83b-4774-985e-4e1f0480c1cf" name="Changes" comment="commmit test_bug_tracker.py">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="5ce7753b-b83b-4774-985e-4e1f0480c1cf" name="Changes" comment="commmit разных папок">
+      <change afterPath="$PROJECT_DIR$/Module 3.0 -Function/rectangle_area.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/test_file.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scipt_analysis" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../My_PythonProject/.idea/My_PythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../My_PythonProject/.idea/My_PythonProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PythonProject" beforeDir="false" afterPath="$PROJECT_DIR$/../PythonProject" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Задачи из п.5 раздела 2.2/.idea/My_PythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Задачи из п.5 раздела 2.2/.idea/My_PythonProject.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +64,11 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/user/PycharmProjects/Final tasks of section 2.2&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\PycharmProjects\Final tasks of section 2.2\Module 3.0 -Function" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -228,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745097875728</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="commmit разных папок">
+      <option name="closed" value="true" />
+      <created>1745328634695</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1745328634695</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -249,6 +258,7 @@
     <MESSAGE value="commmit some files" />
     <MESSAGE value="commmit script_analysis" />
     <MESSAGE value="commmit test_bug_tracker.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="commmit test_bug_tracker.py" />
+    <MESSAGE value="commmit разных папок" />
+    <option name="LAST_COMMIT_MESSAGE" value="commmit разных папок" />
   </component>
 </project>
