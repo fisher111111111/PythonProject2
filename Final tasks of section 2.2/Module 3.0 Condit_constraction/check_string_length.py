@@ -1,4 +1,5 @@
 def check_string_length(string, length):
+
     if len(string) > length:
         return f'Длина строки "{string}" достаточная.'
     else:
