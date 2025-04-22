@@ -4,10 +4,10 @@ def count_items(*args):
 
 def main():
 
-    count1 = count_items(1, 2, 3, 4, 5)
+    count1 = count_items(1, 2, 3, 4, 5, 6, 7)
     print(f"Количество переданных элементов: {count1}.")
 
-    count2 = count_items("apple", "banana", "cherry")
+    count2 = count_items("apple", "banana", "cherry", "orange", "hammer")
     print(f"Количество переданных элементов: {count2}.")
 
 
