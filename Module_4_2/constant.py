@@ -1,5 +1,4 @@
 
-
 BASE_URL = "https://restful-booker.herokuapp.com"
 HEADERS = {"Content-Type": "application/json", "Accept": "application/json"}
 VALID_CREDENTIALS = {"username": "admin", "password": "password123"}
