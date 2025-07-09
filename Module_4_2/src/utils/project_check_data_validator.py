@@ -1,13 +1,12 @@
-
 import pytest
 from pydantic import BaseModel, ValidationError
 from requests import Response
 from typing import Type
-from project_data import BookingResponseData
+from project_data import BookingCheckDates
 
-def validate_response_data(
+def validate_check_dates(
     response: Response,
-    model: Type[BookingResponseData],
+    model: Type[BookingCheckDates],
     expected_status: int = 200,
     expected_data: dict | None = None
 ) -> BaseModel:
@@ -26,7 +25,6 @@ def validate_response_data(
         pytest.fail(f"Pydantic валидация не прошла:\n{e}")
 
     if expected_data:
-        # Обернём данные в такую же модель для сравнения
         expected_model = model(**expected_data)
         if parsed.model_dump(exclude_unset=True) != expected_model.model_dump(exclude_unset=True):
             pytest.fail(

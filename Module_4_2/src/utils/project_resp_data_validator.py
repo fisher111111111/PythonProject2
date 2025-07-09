@@ -1,13 +1,12 @@
-
 import pytest
 from pydantic import BaseModel, ValidationError
 from requests import Response
 from typing import Type
+from project_data import BookingResponseData
 
-
-def validate_response(
+def validate_response_data(
     response: Response,
-    model: Type[BaseModel],
+    model: Type[BookingResponseData],
     expected_status: int = 200,
     expected_data: dict | None = None
 ) -> BaseModel:
