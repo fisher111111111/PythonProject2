@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, g
+from flask import Flask, request, g
 from strawberry.flask.views import GraphQLView
 from schema import schema
 from models import SessionLocal, create_tables, seed_data  # Импортируем из models.py
@@ -20,15 +20,18 @@ def teardown_db_session(exception=None):
     if db is not None:
         db.close()
 
-# Используем GraphQLView от Strawberry
+class CustomGraphQLView(GraphQLView):
+    def get_context(self, request) -> dict:
+        return {"db": get_db_session(), "request": request}
+
+
 app.add_url_rule(
     '/graphql',
     view_func=GraphQLView.as_view(
         'graphql_view',
         schema=schema,
         graphiql=True,  # Включаем GraphiQL для удобного тестирования
-        # context_getter предоставляет объект, который будет доступен как info.context в resolvers
-        context_getter=lambda: {"db": get_db_session()}
+        get_context=lambda: {"db": get_db_session()}
     )
 )
 
