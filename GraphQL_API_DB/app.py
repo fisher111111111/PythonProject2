@@ -31,8 +31,7 @@ app.add_url_rule(
         'graphql_view',
         schema=schema,
         graphiql=True,  # Включаем GraphiQL для удобного тестирования
-        get_context=lambda: {"db": get_db_session()}
-    )
+        )
 )
 
 if __name__ == '__main__':
