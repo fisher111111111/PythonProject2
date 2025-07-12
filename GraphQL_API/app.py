@@ -1,16 +1,15 @@
 # app.py
 from flask import Flask
-from flask_graphql import GraphQLView
+from strawberry.flask.views import GraphQLView
 from schema import schema
 
 app = Flask(__name__)
 
-# Добавляем маршрут /graphql, который будет использовать наш Graphene-схему.
-# graphiql=True включает интерактивную среду GraphiQL для тестирования в браузере.
+# Используем GraphQLView от Strawberry
 app.add_url_rule(
     '/graphql',
     view_func=GraphQLView.as_view(
-        'graphql',
+        'graphql_view', # Имя функции
         schema=schema,
         graphiql=True # Включаем GraphiQL для удобного тестирования
     )

@@ -1,106 +1,105 @@
 # schema.py
-import graphene
+import strawberry
+from typing import List, Optional
 
 # Имитация базы данных в памяти
 USERS_DATA = {}
 next_user_id = 1
-# Также добавим некоторые посты для демонстрации связи
 POSTS_DATA = {}
 next_post_id = 1
 
-class User(graphene.ObjectType):
-    """Тип пользователя."""
-    id = graphene.ID()
-    name = graphene.String()
-    email = graphene.String()
-    posts = graphene.List(lambda: Post) # Использование lambda для избежания циклической зависимости
+@strawberry.type
+class User:
+    id: strawberry.ID
+    name: str
+    email: Optional[str] = None
 
-    def resolve_posts(self, info):
+    @strawberry.field
+    def posts(self) -> List["Post"]:
         # В реальном приложении здесь был бы запрос к БД
-        return [post for post in POSTS_DATA.values() if post['author_id'] == int(self.id)]
+        return [Post(**post) for post in POSTS_DATA.values() if post['author_id'] == int(self.id)]
 
-class Post(graphene.ObjectType):
-    """Тип поста."""
-    id = graphene.ID()
-    title = graphene.String()
-    published = graphene.Boolean()
-    link = graphene.String()
-    author = graphene.Field(User)
+@strawberry.type
+class Post:
+    id: strawberry.ID
+    title: str
+    published: bool
+    link: Optional[str] = None
+    author: User # Strawberry автоматически разрешит связанный объект
 
-    def resolve_author(self, info):
+    # Дополнительное поле для хранения author_id, которое не отображается в GraphQL-схеме
+    # но используется для внутренних связей
+    author_id: strawberry.Private[int]
+
+    @strawberry.field
+    def author(self) -> User:
         # В реальном приложении здесь был бы запрос к БД
-        author_id = self.author_id # author_id будет добавлен в POSTS_DATA
-        return USERS_DATA.get(author_id)
+        author_data = USERS_DATA.get(self.author_id)
+        return User(**author_data) if author_data else None
 
 # --- QUERY (Запросы на чтение) ---
-class Query(graphene.ObjectType):
-    """Определяет все доступные запросы (Query)."""
-    users = graphene.List(User)
-    user = graphene.Field(User, id=graphene.ID(required=True))
-
-    def resolve_users(self, info):
+@strawberry.type
+class Query:
+    @strawberry.field
+    def users(self) -> List[User]:
         """Возвращает список всех пользователей."""
         return [User(**user) for user in USERS_DATA.values()]
 
-    def resolve_user(self, info, id):
+    @strawberry.field
+    def user(self, id: strawberry.ID) -> Optional[User]:
         """Возвращает пользователя по ID."""
         user_data = USERS_DATA.get(int(id))
         return User(**user_data) if user_data else None
 
 # --- MUTATIONS (Запросы на изменение) ---
 
-class CreateUser(graphene.Mutation):
-    """Мутация для создания нового пользователя."""
-    class Arguments:
-        name = graphene.String(required=True)
-        email = graphene.String()
+@strawberry.type
+class CreateUserResult:
+    user: User
 
-    Output = User # Что возвращаем после создания
+@strawberry.type
+class UpdateUserResult:
+    user: User
 
-    def mutate(self, info, name, email=None):
+@strawberry.type
+class DeleteUserResult:
+    success: bool
+
+@strawberry.type
+class Mutation:
+    @strawberry.mutation
+    def create_user(self, name: str, email: Optional[str] = None) -> CreateUserResult:
         global next_user_id
         user_id = next_user_id
         next_user_id += 1
 
-        new_user = {
+        new_user_data = {
             'id': user_id,
             'name': name,
             'email': email
         }
-        USERS_DATA[user_id] = new_user
-        return CreateUser(user=User(**new_user))
+        USERS_DATA[user_id] = new_user_data
+        return CreateUserResult(user=User(**new_user_data))
 
-class UpdateUser(graphene.Mutation):
-    """Мутация для обновления существующего пользователя."""
-    class Arguments:
-        id = graphene.ID(required=True)
-        name = graphene.String()
-        email = graphene.String()
-
-    Output = User # Что возвращаем после обновления
-
-    def mutate(self, info, id, name=None, email=None):
+    @strawberry.mutation
+    def update_user(self, id: strawberry.ID, name: Optional[str] = None, email: Optional[str] = None) -> UpdateUserResult:
         user_id = int(id)
-        user = USERS_DATA.get(user_id)
-        if not user:
+        user_data = USERS_DATA.get(user_id)
+        if not user_data:
             raise Exception(f"Пользователь с ID {id} не найден.")
 
         if name is not None:
-            user['name'] = name
+            user_data['name'] = name
         if email is not None:
-            user['email'] = email
+            user_data['email'] = email
 
-        USERS_DATA[user_id] = user # Обновляем данные в словаре (по факту уже обновлено, но для ясности)
-        return UpdateUser(user=User(**user))
+        # Обновлять словарь не обязательно, так как мы изменили user_data по ссылке,
+        # но для ясности оставим:
+        USERS_DATA[user_id] = user_data
+        return UpdateUserResult(user=User(**user_data))
 
-class DeleteUser(graphene.Mutation):
-    """Мутация для удаления пользователя."""
-    class Arguments:
-        id = graphene.ID(required=True)
-
-    Output = graphene.Boolean # Просто булево значение, обозначающее успех операции
-
-    def mutate(self, info, id):
+    @strawberry.mutation
+    def delete_user(self, id: strawberry.ID) -> DeleteUserResult:
         user_id = int(id)
         if user_id in USERS_DATA:
             del USERS_DATA[user_id]
@@ -108,17 +107,11 @@ class DeleteUser(graphene.Mutation):
             posts_to_delete = [pid for pid, post in POSTS_DATA.items() if post['author_id'] == user_id]
             for pid in posts_to_delete:
                 del POSTS_DATA[pid]
-            return True
-        return False
-
-class Mutation(graphene.ObjectType):
-    """Объединяет все мутации."""
-    create_user = CreateUser.Field()
-    update_user = UpdateUser.Field()
-    delete_user = DeleteUser.Field()
+            return DeleteUserResult(success=True)
+        return DeleteUserResult(success=False)
 
 # Создаем финальную схему GraphQL
-schema = graphene.Schema(query=Query, mutation=Mutation)
+schema = strawberry.Schema(query=Query, mutation=Mutation)
 
 # --- Добавление начальных данных для тестирования ---
 def init_data():
