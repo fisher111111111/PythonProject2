@@ -10,7 +10,7 @@ class Post:
     link: Optional[str] = None
     author_id: strawberry.Private[int]
 
-    @strawberry.field  # Убедитесь, что декоратор используется правильно
+    @strawberry.field()  # Вызов без параметров, добавлены скобки
     def author(self, info) -> "User":
         user = info.context['db'].query(UserModel).filter(UserModel.id == self.author_id).first()
         return User(**user.dict()) if user else None
@@ -21,26 +21,24 @@ class User:
     name: str
     email: Optional[str] = None
 
-    @strawberry.field
+    @strawberry.field()  # Добавлены скобки
     def posts(self, info) -> List[Post]:
         posts = info.context['db'].query(PostModel).filter(PostModel.author_id == int(self.id)).all()
-        return [Post(**post.dict()) for post in posts]  # Аналогичное исправление здесь
-
+        return [Post(**post.dict()) for post in posts]
 
 @strawberry.type
 class Query:
-    @strawberry.field
+    @strawberry.field()  # Добавлены скобки
     def users(self, info) -> List[User]:
         db = info.context['db']
         users = db.query(UserModel).all()
         return [User(**user.dict()) for user in users]
 
-    @strawberry.field  # Не забудьте добавить декоратор для метода
+    @strawberry.field()  # Добавлены скобки
     def user(self, info, id: strawberry.ID) -> Optional[User]:
         db = info.context['db']
         user = db.query(UserModel).filter(UserModel.id == int(id)).first()
-        return User(**user.dict()) if user else None  # Используйте .dict()
-
+        return User(**user.dict()) if user else None
 
 @strawberry.type
 class CreateUserResult:
@@ -56,7 +54,7 @@ class DeleteUserResult:
 
 @strawberry.type
 class Mutation:
-    @strawberry.mutation
+    @strawberry.mutation()  # Добавлены скобки
     def create_user(self, info, name: str, email: Optional[str] = None) -> CreateUserResult:
         db = info.context['db']
         new_user_data = UserModel(name=name, email=email)
@@ -65,7 +63,7 @@ class Mutation:
         db.refresh(new_user_data)
         return CreateUserResult(user=User(**new_user_data.dict()))
 
-    @strawberry.mutation  # Добавлен декоратор
+    @strawberry.mutation()  # Добавлены скобки
     def update_user(self, info, id: strawberry.ID, name: Optional[str] = None, email: Optional[str] = None) -> UpdateUserResult:
         db = info.context['db']
         user = db.query(UserModel).filter(UserModel.id == int(id)).first()
@@ -79,7 +77,7 @@ class Mutation:
         db.refresh(user)
         return UpdateUserResult(user=User(**user.dict()))
 
-    @strawberry.mutation  # Добавлен декоратор
+    @strawberry.mutation()  # Добавлены скобки
     def delete_user(self, info, id: strawberry.ID) -> DeleteUserResult:
         db = info.context['db']
         user = db.query(UserModel).filter(UserModel.id == int(id)).first()
