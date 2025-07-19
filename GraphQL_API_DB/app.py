@@ -21,13 +21,13 @@ def teardown_db_session(exception=None):
         db.close()
 
 class CustomGraphQLView(GraphQLView):
-    def get_context(self, request) -> dict:
+    def get_context(self, request, response) -> dict:
         return {"db": get_db_session(), "request": request}
 
 
 app.add_url_rule(
     '/graphql',
-    view_func=GraphQLView.as_view(
+    view_func=CustomGraphQLView.as_view(
         'graphql_view',
         schema=schema,
         graphiql=True,  # Включаем GraphiQL для удобного тестирования
