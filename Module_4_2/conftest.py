@@ -39,9 +39,10 @@ def booking_id(booking_data):
     assert response.status_code == 200
     return response.json()["bookingid"]
 
+#Фикстура создания сессии авторизации и возврат объекта сессии
 @pytest.fixture(scope="session")
 def auth_session():
-    """Create session with authorization and return session`s object """
+    """Create session with authorization and return object of session"""
     session = requests.Session()
     session.headers.update(HEADERS)
 
