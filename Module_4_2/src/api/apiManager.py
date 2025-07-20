@@ -1,12 +1,9 @@
-from constant_of_URL import ConstURL
+from enums.constant_of_url import ConstURL
 
 class ItemApiClient:
-
-    base_url = ConstURL.BASE_URL.value
-
     def __init__(self, auth_session):
         self.auth_session = auth_session
-        self.base_url = ItemApiClient.base_url
+        self.base_url = ConstURL  # Можно также передавать в конструктор, если он может меняться
 
     def create_item(self, item_data):
         """Отправляет запрос на создание item."""

@@ -1,15 +1,15 @@
 import pytest
 import requests
 from faker import Faker
-from constant_of_URL import ConstURL
-import constant_of_headers
+from src.enums.constant_of_url import ConstURL
+from src.enums.constant_of_headers import ConstHeaders
 
 fake = Faker()
 BASE_URL = ConstURL.BASE_URL.value
 
 @pytest.fixture(scope="session")
 def auth_token():
-    response = requests.post(f"{BASE_URL}/auth", json=constant_of_headers.ConstHeaders)
+    response = requests.post(f'{BASE_URL}/auth', json=ConstHeaders)
     assert response.status_code == 200, "Ошибочный статус-код"
     return response.json()["token"]
 
@@ -39,7 +39,7 @@ def booking_id(booking_data):
 def auth_session():
     """Create session with authorization and return object of session"""
     session = requests.Session()
-    session.headers.update(constant_of_headers.ConstHeaders)
+    session.headers.update(ConstHeaders)
 
     auth_response = session.post(f'{BASE_URL}/auth', json={"username": "admin", "password": "password123"})
     token = auth_response.json().get("token")
