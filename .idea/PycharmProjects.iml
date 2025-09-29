@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Module_4_2/src/scenarios" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Module_4_2/src/utils" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Module_4_2/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/PythonProject1/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/Module_4_2/.idea" />
