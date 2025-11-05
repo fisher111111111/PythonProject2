@@ -121,11 +121,11 @@ class ItemScenarios:
         assert item_create in items['data'], "созданного item нет в общем списке"
         return items
 
-if __name__ == "__main__":
-    # Инициализируем необходимые объекты
-    token_session = requests.Session()  # здесь создайте или получите сессию с токеном
-    api_client = ItemsApi(token_session)  # инициализация API клиента с нужными параметрами
-    # Создаем объект класса
-    scenarios = ItemScenarios(token_session, api_client)
-    # Вызываем метод
-    item_id = scenarios.create_check_in_all_items()
+# if __name__ == "__main__":
+#     # Инициализируем необходимые объекты
+#     token_session = requests.Session()  # здесь создайте или получите сессию с токеном
+#     api_client = ItemsApi(token_session)  # инициализация API клиента с нужными параметрами
+#     # Создаем объект класса
+#     scenarios = ItemScenarios(token_session, api_client)
+#     # Вызываем метод
+#     item_id = scenarios.create_check_in_all_items()
