@@ -11,8 +11,8 @@ class ItemScenarios:
 
     def create_check_delete_item(self):
         '''
-        Сценарий 1: создание букинга, проверка ID созданного букинга,
-        затем удаление букинга '''
+        Сценарий: создание итем, проверка ID созданного итем,
+        затем удаление этого итем '''
         # 1. Creating item
         item_create= self.api_client.create_item()
         id_item = item_create.get("id")
@@ -40,8 +40,8 @@ class ItemScenarios:
 
     def create_check_update_item(self):
         '''
-        Сценарий 1: создание букинга, проверка ID созданного букинга,
-        затем удаление букинга '''
+        Сценарий: создание итем, проверка ID созданного итем,
+        затем обновление итем '''
         # 1. Creating item
         item_create = self.api_client.create_item()
         id_item = item_create.get("id")
@@ -70,8 +70,8 @@ class ItemScenarios:
 
     def create_check_get_item (self):
         '''
-        Сценарий 1: Создание итем, проверка ID созданного итем,
-        затем удаление итема
+        Сценарий: Создание итем, проверка ID созданного итем,
+        затем получение итем по ID
         '''
         # 1. Creating item
         item_create = self.api_client.create_item()
@@ -102,7 +102,7 @@ class ItemScenarios:
 
     def create_check_in_all_items(self):
         """
-        Создание итем, затем проверка наличия
+        Cwtyfhbq^ cоздание итем, затем проверка наличия
         созданного итем в общем списке
         """
         # 1. Creating item
@@ -117,7 +117,7 @@ class ItemScenarios:
         print(f"Получен список всех items {items}")
         assert len(items.get("data")) == items.get("count"), "Несоответствие количества data и count"
         assert len(items.get("data")) and items.get("count") != 0, "Полученный объект пуст"
-        print (len(items.get("data")), 'равно', items.get("count"))
+        print (f'data={len(items.get("data"))} должно быть равно count={items.get("count")}')
         assert item_create in items['data'], "созданного item нет в общем списке"
         return items
 
