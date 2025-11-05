@@ -1,6 +1,6 @@
 import requests
-from PythonProject2.venv.src.api.api_items import ItemsApi
-from PythonProject2.venv.src.data_models.data_model_items import RequestItem
+from PythonProject2.src.api.api_items import ItemsApi
+from PythonProject2.src.data_models.data_model_items import RequestItem
 
 
 class ItemScenarios:

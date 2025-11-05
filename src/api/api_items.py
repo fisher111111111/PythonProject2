@@ -1,5 +1,5 @@
-from PythonProject2.venv.src.enums.const_url import ConstURL, ApiHeaders
-from PythonProject2.venv.src.data_models.data_model_items import AuthData,RequestItem
+from PythonProject2.src.enums.const_url import ConstURL, ApiHeaders
+from PythonProject2.src.data_models.data_model_items import AuthData,RequestItem
 import requests
 import json
 

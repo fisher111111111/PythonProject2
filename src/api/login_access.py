@@ -1,6 +1,6 @@
 import requests
 from dotenv import load_dotenv
-from PythonProject2.venv.src.enums.const_url import ConstURL, AuthHeaders
+from PythonProject2.src.enums.const_url import ConstURL, AuthHeaders
 
 load_dotenv()
 

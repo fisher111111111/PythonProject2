@@ -1,6 +1,0 @@
-/workspace.xml
-.env
-.venv/
-.idea/
-__pycache__/
-*.pyc
