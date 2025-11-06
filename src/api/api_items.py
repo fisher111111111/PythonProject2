@@ -30,17 +30,17 @@ class ItemsApi:
 #     result = api.create_item()
 #     print(result)
 
-    def get_all_items(self):
+    def get_all_items(self, params=None):
         """Запрос на получение списка всех items"""
         token_item = self.token
-        params = {'skip': 0, 'limit': 100}
-        response = self.session.get(f'{self.base_url}', params=params,
+        default_params = {'skip': 0, 'limit': 100}
+        response = self.session.get(f'{self.base_url}', params=default_params,
                                     headers=token_item.headers)
         if response.status_code != 200:
             response.raise_for_status()
         all_items = response.json()
         return all_items
-#
+
 # if __name__ == '__main__':
 #     item_session = requests.Session()
 #     api = ItemsApi(item_session)
