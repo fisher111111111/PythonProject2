@@ -54,7 +54,6 @@ class ItemScenarios:
         print("Успешная проверка item")
 
         #3 Updating item
-        # upd_item_data = self.generate_dates.update_item_data()
         update_item = self.api_client.update_item(id_item)
         return update_item
 
@@ -102,7 +101,7 @@ class ItemScenarios:
 
     def create_check_in_all_items(self):
         """
-        Cwtyfhbq^ cоздание итем, затем проверка наличия
+        Сценарий: создание итем, затем проверка наличия
         созданного итем в общем списке
         """
         # 1. Creating item
@@ -113,9 +112,9 @@ class ItemScenarios:
 
         #2 Get items
         items = self.api_client.get_all_items()
-        assert len(items) > 0, "Получен пустой объект"
+        assert len(items) > 0, "Получен пустой объект"  #
         print(f"Получен список всех items {items}")
-        assert len(items.get("data")) == items.get("count"), "Несоответствие количества data и count"
+        assert len(items.get("data")) == items.get("count"), "Несоответствие количества data и count" # LOOK перенести ассерты в тесты
         assert len(items.get("data")) and items.get("count") != 0, "Полученный объект пуст"
         print (f'data={len(items.get("data"))} должно быть равно count={items.get("count")}')
         assert item_create in items['data'], "созданного item нет в общем списке"
@@ -129,3 +128,56 @@ class ItemScenarios:
 #     scenarios = ItemScenarios(token_session, api_client)
 #     # Вызываем метод
 #     item_id = scenarios.create_check_in_all_items()
+
+    def create_multiple_items(self, count: int = 20):
+        """
+        Создает заданное количество сущностей (задано = 20).
+        Возвращает список созданных сущностей.
+        """
+        # 1. Creating 20 items
+        items_responses = []
+        for _ in range(count):
+            try:
+                created_item = self.api_client.create_item()
+                items_responses.append(created_item)
+            except Exception as e:
+                print(f"Ошибка при создании item: {e}")
+        return items_responses
+
+# if __name__ == "__main__":
+#     # Инициализируем необходимые объекты
+#     token_session = requests.Session()  # здесь создайте или получите сессию с токеном
+#     api_client = ItemsApi(token_session)  # инициализация API клиента с нужными параметрами
+#     # Создаем объект класса
+#     scenarios = ItemScenarios(token_session, api_client)
+#     # Вызываем метод и выводим на печать созданное количество items
+#     items = scenarios.create_multiple_items()
+#     for item in items:  # печатаем item в столбик
+#         print(item)
+
+    def filter_items(self):
+        """
+        Сценарий: выбрать количество итемов по заданными параметрам
+        """
+        # 1 Get items
+        params = RequestItem.params_valid()
+        items = self.api_client.get_all_items(params=params)
+        data = items.get("data", [])
+        skip_value = params.get("skip", 0)
+        limit_value = params.get("limit", 0)
+        expected_count = limit_value - skip_value
+        result = f'совпадение выборки 'if len(data) == expected_count else f'несовпадение выборки '
+        print (len (data))
+        print (expected_count)
+        print (result)
+        return items
+
+if __name__ == "__main__":
+    # Инициализируем необходимые объекты
+    token_session = requests.Session()  # здесь создайте или получите сессию с токеном
+    api_client = ItemsApi(token_session)  # инициализация API клиента с нужными параметрами
+    # Создаем объект класса
+    scenarios = ItemScenarios(token_session, api_client)
+    # Вызываем метод
+    item_ids = scenarios.filter_items()
+    print(f'результат содержимого {item_ids}')
