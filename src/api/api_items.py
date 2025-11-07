@@ -12,7 +12,7 @@ class ItemsApi:
        self.token =  AuthData().auth_token()
        self.data_generator = RequestItem
 
-    def create_item (self):
+    def create_item (self,headers=None, json=None):     # внесены параметры для дальнейшего использования в сценариях
         """Запрос на создание item"""
         token_item = self.token
         item_create = self.data_generator.item_data()
@@ -30,7 +30,7 @@ class ItemsApi:
 #     result = api.create_item()
 #     print(result)
 
-    def get_all_items(self, params=None):
+    def get_all_items(self, params = None):
         """Запрос на получение списка всех items"""
         token_item = self.token
         default_params = {'skip': 0, 'limit': 100}
@@ -40,7 +40,7 @@ class ItemsApi:
             response.raise_for_status()
         all_items = response.json()
         return all_items
-
+#
 # if __name__ == '__main__':
 #     item_session = requests.Session()
 #     api = ItemsApi(item_session)
@@ -60,7 +60,6 @@ class ItemsApi:
             response.raise_for_status()
         item = response.json()
         return item
-
 
 # if __name__ == '__main__':
 #     item_session = requests.Session()
