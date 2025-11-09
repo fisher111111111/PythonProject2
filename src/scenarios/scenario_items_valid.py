@@ -168,8 +168,6 @@ class ItemScenarios:
         expected_count = limit_value - skip_value
         result = f'совпадение выборки 'if len(data) == expected_count else f'несовпадение выборки '
         print (len (data))
-        print (expected_count)
-        print (result)
         return items
 
 if __name__ == "__main__":
