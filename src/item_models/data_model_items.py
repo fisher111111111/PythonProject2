@@ -2,10 +2,11 @@ import requests
 from pydantic import BaseModel, field_validator
 from typing import Optional
 import random
+import string
 from faker import Faker
 import os
 from dotenv import load_dotenv
-from PythonProject2.src.enums.const_url import ConstURL, AuthHeaders
+from PythonProject2.src.enums_item.const_url import ConstURL, AuthHeaders
 
 load_dotenv()
 fake = Faker('ru_RU')
@@ -19,6 +20,7 @@ class RequestItem (BaseModel):
     """ Функции для генерации тестовых данных"""
     @classmethod
     def item_data(cls) -> "RequestItem":
+        '''Генерация данный для создания итем'''
         object_item = cls(
             title=fake.text(max_nb_chars=10),
             description=fake.text(max_nb_chars=random.randint
@@ -28,8 +30,13 @@ class RequestItem (BaseModel):
         )
         return object_item.model_dump()
 
+# object_data = RequestItem.item_data()
+# print(f'item_data = {object_data}')
+
+
     @classmethod
     def update_item_data(cls) -> "RequestItem":
+        '''Генерация данных для обновления итем'''
         object_item = cls(
             title=fake.text(max_nb_chars=20),
             description=fake.text(max_nb_chars=random.randint
@@ -39,22 +46,39 @@ class RequestItem (BaseModel):
         )
         return object_item.model_dump()
 
+    @classmethod
+    def params_valid(cls):  # далее не стал делать невалидные данные для params, т.к. параметры работают некорректно!!!
+        '''Генерация не дефолтных параметров для проверки работоспособности выборки сервера'''
+        skip = random.randint(0, 10)
+        limit = random.randint(11, 19)
+        return {"skip": skip, "limit": limit}
+
 """Класс генерации невалидиных данных"""
 class WrongItems(BaseModel):
+    '''
+    генерация данных где  более 255 символов для значения "title"
+    '''
     title: str
     description: Optional[str] = None
 
     @classmethod
-    def wrong_item_data(cls):
-        length_text = random.randint(256, 299)
-        wrong_text = fake.text(max_nb_chars=length_text)
+    def too_long_data(cls) -> "WrongItems":
+        length = random.randint(256, 299)
+        letters = string.ascii_letters + string.digits + string.punctuation + ' '
+        result = ''.join(random.choices(letters, k=length))
         object_data = cls(
-            title=wrong_text,
-            description=fake.text(max_nb_chars=15)
-        )
-        return object_data
+                    title=result,
+                    description=fake.text(max_nb_chars=15)
+                )
+        return object_data.model_dump()
+
+# object_data = WrongItems.too_long_data()
+# print(f'too_long_data = {object_data}')
+# print(f"too_long_data len = {len(object_data['title'])}")
+
 
 class NoneItems(BaseModel):
+    ''' генерация данных, где "title" равно None '''
     title: None
     description: Optional[str] = None
 
@@ -62,12 +86,12 @@ class NoneItems(BaseModel):
     def none_item_data(cls) -> "NoneItems":
         object_item = cls(
             title=None,
-            description=fake.text(max_nb_chars=random.randint
-            (1, 25))
-            if random.choice([True, False])
-            else None
+            description=fake.text(max_nb_chars=15)
         )
         return object_item.model_dump()
+
+# object_data = NoneItems.none_item_data()
+# print(f'non_item_data = {object_data}')
 
 """Класс получаемых данных"""
 class ResponseItem (BaseModel):
@@ -89,7 +113,6 @@ class ResponseUserItems(BaseModel):
             raise ValueError(f'Количество элементов ({v}) не соответствует количеству элементов данных ({len(data)})')
         return v
 
-# Внимание дублирование кода всего класса
 """Класс генерации авторизации"""
 class AuthData:
     def auth_item_data(self):
@@ -122,7 +145,9 @@ class AuthData:
         token_session = requests.Session()
         auth_data = AuthHeaders.AUTH_DATA.value
         auth_headers = AuthHeaders.AUTH_HEADERS.value
-        response = token_session.post(LOGIN_URL, headers=auth_headers, data=auth_data)
+        response = token_session.post(LOGIN_URL,
+                                      headers=auth_headers,
+                                      data=auth_data)
         response.raise_for_status()
         items_token = response.json()["access_token"]
         token_session.headers.update({"Authorization": f"Bearer {items_token}"})
@@ -130,7 +155,22 @@ class AuthData:
 
 # auth= AuthData()
 # session = auth.auth_token()
-#
 # print(f'объект= {session}')  # выведет информацию об объекте Session
 # print(f'хеддеры = {session.headers}')  # выведет заголовки, включая токен авторизации
 
+    def auth_empty_token(self):
+        """Создание сессию с авторизацией"""
+        token_session = requests.Session()
+        auth_data = AuthHeaders.AUTH_DATA.value
+        auth_headers = AuthHeaders.AUTH_HEADERS.value
+        response = token_session.post(LOGIN_URL,
+                                      headers=auth_headers,
+                                      data=auth_data)
+        response.raise_for_status()
+        token_session.headers.update({"Authorization": f""})
+        print( token_session.headers)
+        return token_session
+
+# auth= AuthData()
+# session = auth.auth_empty_token()
+# print(f'объект= {session}')
