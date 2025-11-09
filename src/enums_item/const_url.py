@@ -24,6 +24,15 @@ class AuthHeaders(Enum):
         "client_secret": ""
     }
 
+    WRONG_AUTH_DATA = {
+        "username": os.getenv("INVALID_USERNAME"),
+        "password": os.getenv("INVALID_PASSWORD"),
+        "grant_type": "password",
+        "scope": "",
+        "client_id": "",
+        "client_secret": ""
+    }
+
 class ApiHeaders(Enum):
     API_HEADERS = {
         "Content-Type": "application/json",
