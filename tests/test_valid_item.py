@@ -124,23 +124,5 @@ class TestValid:
         items_responses, data, expected_count = valid_scenarios.filter_items()
         json_items=items_responses.json()
         validate_items(items_responses, model=ResponseAllItems, expected_data=json_items)
-        # assert
         assert len(data) <= expected_count, f'Получено {len(data)} элементов вместо ожидаемого количества'
         assert items_responses.status_code == 200, "Получен неожидаемый статус-код"
-
-    # with allure.step("Отправляем запрос на создание item"):
-        #     create = item_session.post(ItemsURLs.items_endpoint(),
-        #                                  headers=item_token,
-        #                                  json=create_item_data)
-        #     allure.attach(str(create), name="Результат создания item", attachment_type=allure.attachment_type.JSON)
-        # assert create.status_code == 200, "Неожидаемый статус код"
-        # with allure.step("Забираем id полученного item"):
-        #     id_item = create.json().get("id")
-        #     allure.attach(str(id_item), name="Полученный ID =", attachment_type=allure.attachment_type.TEXT)
-        # with allure.step("Отравляем запрос на получение item по ID"):
-        #     get_item = item_session.get(ItemsURLs.items_endpoint_id(id_item),
-        #                                 headers=item_token)
-        #     allure.attach(str(get_item), name="Результат запроса на получение item по ID", attachment_type=allure.attachment_type.JSON)
-        # assert get_item.status_code == 200, "Неожидаемый статус код"
-        # validate_item (get_item, model=ResponseItem, expected_data=get_item.json()) # здесь в expected_data= помещаем get_item как ожидаемые данные
-        #

@@ -5,9 +5,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class ConstURL(Enum):
-    BASE_URL = "https://api.fast-api.senior-pomidorov.ru"
-    ITEMS_URL = f"{BASE_URL}/api/v1/items/"
-    LOGIN_URL = f"{BASE_URL}/api/v1/login/access-token"
+    BASE_URL = "https://dashboard.fast-api.senior-pomidorov.ru/"
+    ITEMS_URL = f"https://api.fast-api.senior-pomidorov.ru/api/v1/items/"
+    LOGIN_URL = f"https://api.fast-api.senior-pomidorov.ru/api/v1/login/access-token"
 
 class AuthHeaders(Enum):
     AUTH_HEADERS = {

@@ -1,6 +1,6 @@
-import requests
+import os
 from dotenv import load_dotenv
-from PythonProject2.src.enums.const_url import ConstURL, AuthHeaders
+from PythonProject2.src.enums_item.const_url import ConstURL, AuthHeaders
 
 load_dotenv()
 
@@ -16,51 +16,39 @@ class AuthLogin:
         response_token = self.auth_session.post(self.login, headers=self.headers, data=auth_data)
         return response_token
 
-# session = requests.Session()
-# auth = AuthLogin(session)
-# response = auth.create_token()
-# print(response.text)
+    def wrong_create_token(self):
+        """Создаем валидные данные для авторизации без grant_type"""
+        auth_data = {
+            "username": os.getenv("VALID_USERNAME"),
+            "password": os.getenv("VALID_PASSWORD"),
+            "grant_type": ""
+        }
+        response_token = self.auth_session.post(self.login, headers=self.headers, data=auth_data)
+        return response_token
 
-"""Закомментированные негативные кейсы получения токена выносим в сценарии и покрываем сценарии тестами"""
-#     def wrong_create_token(self):
-#         """Создаем валидные данные для авторизации"""
-#         auth_data = {
-#             "username": os.getenv("VALID_USERNAME"),
-#             "password": os.getenv("VALID_PASSWORD"),
-#             "grant_type": ""
-#         }
-#         response = self.auth_session.post(f'{self.base_url}{self.login}', data=auth_data)
-#         return response
-#
-# session = requests.Session()
-# auth = AuthLogin(session)
-# response = auth.wrong_create_token()
-# print(response.status_code, response.text)
+    def auth_wrong_data(self):
+        """Невалидные данные для авторизации"""
+        auth_wrong = {
+            "username": os.getenv("INVALID_USERNAME"),
+            "password": os.getenv("INVALID_PASSWORD")
+        }
+        response_token = self.auth_session.post(self.login, headers=self.headers, data=auth_wrong)
+        return response_token
 
-#     def auth_wrong_data(self):
-#         """Невалидные данные для авторизации"""
-#         auth_wrong = {
-#             "username": os.getenv("INVALID_USERNAME"),
-#             "password": os.getenv("INVALID_PASSWORD")
-#         }
-#         response = self.auth_session.post(f'{self.base_url}{self.login}', data=auth_wrong)
-#         return response
-#
-# # session = requests.Session()
-# # auth = AuthLogin(session)
-# # response = auth.auth_wrong_data()
-# # print(response.status_code, response.text)
-#
-#     def non_auth_data(self):
-#         """Отправляет запрос на создание токена аутентификации."""
-#         none_auth = {
-#             "username": os.getenv("None"),
-#             "password": os.getenv("None")
-#         }
-#         response = self.auth_session.post(f'{self.base_url}{self.login}', data=none_auth)
-#         return response
+    def non_auth_data(self):
+        """Отправляет запрос на создание токена аутентификации."""
+        none_auth = {
+            "username": os.getenv("None"),
+            "password": os.getenv("None")
+        }
+        response_token = self.auth_session.post(self.login, headers=self.headers, data=none_auth)
+        return response_token
 
-# session = requests.Session()
-# auth = AuthLogin(session)
-# response = auth.auth_wrong_data()
-# print(response.status_code, response.text)
+    def empty_auth_data(self):
+        """Отправляет запрос на создание токена аутентификации."""
+        empty_auth = {
+            "username": "",
+            "password": ""
+        }
+        response_token = self.auth_session.post(self.login, headers=self.headers, data=empty_auth)
+        return response_token

@@ -7,12 +7,12 @@ class ItemsURLs:
 
     @classmethod
     def auth_endpoint(cls):
-        return cls.base_url() + ConstURL.LOGIN_URL.value
+        return ConstURL.LOGIN_URL.value
 
     @classmethod
     def items_endpoint(cls):
-        return cls.base_url() + ConstURL.ITEMS_URL.value
+        return ConstURL.ITEMS_URL.value
 
     @classmethod
-    def booking_endpoint_id(cls, id_item):
+    def items_endpoint_id(cls, id_item):
         return cls.items_endpoint()+ str(id_item)
