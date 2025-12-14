@@ -61,35 +61,58 @@ https://api.fast-api.senior-pomidorov.ru/docs#/
 ### Как скачать и развернуть проект локально
 
 #### Шаг 1. Клонирование репозитория
-
 ```bash
 git clone https://github.com/fisher111111111/PythonProject2/tree/main
 cd PythonProject2
 ```
 #### Шаг 2. Установка uv (если не установлен)
-
 ```bash
 pip install uv
 ```
 #### Шаг 3. Создание и активация виртуального окружения (рекомендуется)
-
+Создание окружения
+```bash
 python -m venv .venv
-### Windows
+```
+Активация окружения
+#### for Windows
+```bash
 .venv\Scripts\activate
-### Linux/macOS
+```
+#### for Linux/macOS
+```bash
 source .venv/bin/activate
+```
+!!! По окончании работы для деактивации и выхода из виртуального 
+окружения используйте команду
+```bash
+deactivate
+``` 
 
 #### Шаг 4. Установка зависимостей
-
-Если зависимости указаны в pyproject.toml, используйте:
-
+Для установки зависимостей указанных в pyproject.toml, используйте:
 ```bash 
 uv pip install -r pyproject.toml 
 ```
-Или установите необходимые пакеты вручную.
+или установите необходимые пакеты вручную в список значения поля dependencies = []
+(for example) 
+```toml
+[project]
+name = "PythonProject2"
+version = "0.1.0"
+description = "Project for testing API of http://dashboard.fast-api.senior-pomidorov.ru"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "allure-pytest>=2.15.2",
+    "dotenv>=0.9.9",
+    "faker>=38.2.0",
+    "pytest>=9.0.2",
+    "requests>=2.32.5",
+]
+```
 
 #### Шаг 5. Проверка работоспособности
-
 Запустите основной скрипт:
 ```bash
 python main.py
@@ -100,8 +123,7 @@ python main.py
 uv --help
 ```
 
-### Запуск автоматизированных тестов на Python 
-
+### Запуск автоматизированных тестов на Python
 Для запуска тестов используйте в терминале команду:
 ```bash
 pytest
