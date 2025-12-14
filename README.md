@@ -50,7 +50,6 @@ https://api.fast-api.senior-pomidorov.ru/docs#/
 └── ux.lock
 ```
 
-
 ### Расположение проекта
 Проект расположен на удаленном репозитории на [**Github**](https://github.com/fisher111111111/PythonProject2)
 
@@ -62,7 +61,7 @@ https://api.fast-api.senior-pomidorov.ru/docs#/
 
 #### Шаг 1. Клонирование репозитория
 ```bash
-git clone https://github.com/fisher111111111/PythonProject2/tree/main
+git clone https://github.com/fisher111111111/PythonProject2.git
 cd PythonProject2
 ```
 #### Шаг 2. Установка uv (если не установлен)
