@@ -52,7 +52,7 @@ https://api.fast-api.senior-pomidorov.ru/docs#/
 
 
 ### Расположение проекта
-Проект расположен на удаленном репозитории на [**Github**](https://github.com/fisher111111111/PythonProject2/tree/main)
+Проект расположен на удаленном репозитории на [**Github**](https://github.com/fisher111111111/PythonProject2)
 
 ### Установка фреймворка для запуска автоматизированных тестов 
 
