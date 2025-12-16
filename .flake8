@@ -1,0 +1,20 @@
+[flake8]
+# Максимальная длина строки
+max-line-length = 120
+
+# Игнорируемые предупреждения
+ignore = W503,E203
+
+exclude = .git,.venv,dist,build,*.egg-info __pycache__
+
+# Включаемые категории предупреждений
+select = C,E,F,W,B,T,I,N
+
+ # Отключаем докстринги
+extend-ignore = D100,D101,D102,D103,D104,D105,D106,D107
+
+ # Показывать источник нарушений
+show-source = True
+
+# Статистика найденных ошибок
+statistics = True

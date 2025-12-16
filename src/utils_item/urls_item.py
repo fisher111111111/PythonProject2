@@ -16,4 +16,4 @@ class ItemsURLs:
 
     @classmethod
     def items_endpoint_id(cls, id_item):
-        return cls.items_endpoint()+ str(id_item)
+        return cls.items_endpoint() + str(id_item)

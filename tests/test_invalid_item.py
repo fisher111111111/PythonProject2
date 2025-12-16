@@ -1,7 +1,11 @@
 import allure
 
-from PythonProject2.src.item_models.data_error_model import Error422, Error401, Error404
-from PythonProject2.src.utils_item.validator_error_items import validate_error422, validate_error401, validate_error404
+from PythonProject2.src.item_models.data_error_model import Error401, Error404, Error422
+from PythonProject2.src.utils_item.validator_error_items import (
+    validate_error401,
+    validate_error404,
+    validate_error422,
+)
 
 
 @allure.suite("Раздел Items")
@@ -15,8 +19,7 @@ class TestInvalid:
         item_json = item_obj.json()
         data = item_json["detail"][0]["type"]
         assert data == "string_too_long", "Получен неожидаемый текст"
-        validate_error422(item_obj, model=Error422,
-                      expected_data= item_json)
+        validate_error422(item_obj, model=Error422, expected_data=item_json)
         assert len(item_json) > 0, "Ответ не должен быть пустым"
 
     @allure.title("Тест на создание item с пустым title")
@@ -26,8 +29,7 @@ class TestInvalid:
         item_json = item_obj.json()
         data = item_json["detail"][0]["type"]
         assert data == "string_too_short", "Получен неожидаемый текст"
-        validate_error422(item_obj, model=Error422,
-                      expected_data= item_json)
+        validate_error422(item_obj, model=Error422, expected_data=item_json)
         assert len(item_json) > 0, "Ответ не должен быть пустым"
 
     @allure.title("Тест на создание item с пустым токеном")
@@ -37,12 +39,13 @@ class TestInvalid:
         item_json = item_obj.json()
         data = item_json["detail"]
         assert data == "Not authenticated", "Получен неожидаемый текст"
-        validate_error401(item_obj, model=Error401,
-                          expected_data=item_json)
+        validate_error401(item_obj, model=Error401, expected_data=item_json)
 
-    @allure.title("Тест на создание item, а затем попытка его получения с пустым токеном")
+    @allure.title(
+        "Тест на создание item, а затем попытка его получения с пустым токеном"
+    )
     def test_create_and_get_empty_token(self, invalid_item, cleanup_items):
-        item_create,item_obj = invalid_item.create_and_get_empty_token()
+        item_create, item_obj = invalid_item.create_and_get_empty_token()
         json_item_obj = item_create.json()
         item_id = json_item_obj.get("id")
         cleanup_items.append(item_id)
@@ -52,12 +55,11 @@ class TestInvalid:
         item_json = item_obj.json()
         data = item_json["detail"]
         assert data == "Not authenticated", "Получен неожидаемый текст"
-        validate_error401(item_obj, model=Error401,
-                          expected_data=item_json)
+        validate_error401(item_obj, model=Error401, expected_data=item_json)
 
     @allure.title("Тест на создание item, а затем попытка обновления с пустым title")
     def test_create_and_update_empty_token(self, invalid_item, cleanup_items):
-        item_create,item_obj = invalid_item.create_and_update_empty_token()
+        item_create, item_obj = invalid_item.create_and_update_empty_token()
         json_item_obj = item_create.json()
         item_id = json_item_obj.get("id")
         cleanup_items.append(item_id)
@@ -67,12 +69,11 @@ class TestInvalid:
         item_json = item_obj.json()
         data = item_json["detail"]
         assert data == "Not authenticated", "Получен неожидаемый текст"
-        validate_error401(item_obj, model=Error401,
-                          expected_data=item_json)
+        validate_error401(item_obj, model=Error401, expected_data=item_json)
 
     @allure.title("Тест на создание item, а затем попытка удаления с пустым токеном")
     def test_create_and_delete_empty_token(self, invalid_item, cleanup_items):
-        item_create,item_obj = invalid_item.create_and_delete_empty_token()
+        item_create, item_obj = invalid_item.create_and_delete_empty_token()
         json_item_obj = item_create.json()
         item_id = json_item_obj.get("id")
         cleanup_items.append(item_id)
@@ -82,8 +83,7 @@ class TestInvalid:
         item_json = item_obj.json()
         data = item_json["detail"]
         assert data == "Not authenticated", "Получен неожидаемый текст"
-        validate_error401(item_obj, model=Error401,
-                          expected_data=item_json)
+        validate_error401(item_obj, model=Error401, expected_data=item_json)
 
     @allure.title("Тест на попытку повторного удаления item")
     def test_double_delete_item(self, invalid_item):
@@ -92,8 +92,9 @@ class TestInvalid:
         json_delete_item = delete_item.json()
         json_double_delete = double_delete.json()
         data = json_double_delete["detail"]
-        validate_error404(double_delete, model = Error404,
-                          expected_data=json_double_delete)
+        validate_error404(
+            double_delete, model=Error404, expected_data=json_double_delete
+        )
         assert item_obj.status_code == 200, "Получен неожидаемый статус-код "
         assert len(json_item_obj) > 0, "JSON не должен быть пустым"
         assert delete_item.status_code == 200, "Получен неожидаемый статус-код"
@@ -106,8 +107,7 @@ class TestInvalid:
     def test_update_unreal_item(self, invalid_item):
         item_obj = invalid_item.update_unreal_item()
         json_item_obj = item_obj.json()
-        validate_error422(item_obj, model=Error422,
-                          expected_data=json_item_obj)
+        validate_error422(item_obj, model=Error422, expected_data=json_item_obj)
         assert item_obj.status_code == 422, "Получен неожидаемый статус-код "
         data = json_item_obj["detail"][0]["type"]
         assert data == "uuid_parsing", "Получен неожидаемый текст"
@@ -117,8 +117,7 @@ class TestInvalid:
     def test_delete_unreal_item(self, invalid_item):
         item_obj = invalid_item.delete_unreal_item()
         json_item_obj = item_obj.json()
-        validate_error422(item_obj, model=Error422,
-                          expected_data=json_item_obj)
+        validate_error422(item_obj, model=Error422, expected_data=json_item_obj)
         assert item_obj.status_code == 422, "Получен неожидаемый статус-код "
         data = json_item_obj["detail"][0]["type"]
         assert data == "uuid_parsing", "Получен неожидаемый текст"
