@@ -1,5 +1,6 @@
 from PythonProject2.src.enums_item.const_url import ConstURL
 
+
 class ItemsURLs:
     @staticmethod
     def base_url():

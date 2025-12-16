@@ -1,9 +1,12 @@
 import allure
+
 from PythonProject2.src.item_models.data_model_items import ResponseItem, ResponseAllItems, ResponseDeleteItems
 from PythonProject2.src.utils_item.validator_item_data import validate_item
 from PythonProject2.src.utils_item.validator_all_items import validate_items
 from PythonProject2.src.utils_item.validator_item_data import validate_delete_item
 
+@allure.suite("Раздел Items")
+@allure.sub_suite("Позитивные сценарии")
 class TestValid:
 
     @allure.title("Тест на создание item")

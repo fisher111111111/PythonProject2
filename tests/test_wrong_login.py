@@ -1,6 +1,11 @@
+import allure
+
 from PythonProject2.src.item_models.data_error_model import Error422, Error400
 from PythonProject2.src.utils_item.validator_error_items import validate_error422, validate_error400
 
+
+@allure.suite("Раздел Авторизация")
+@allure.sub_suite("Негативные сценарии")
 class TestInvalidLogin:
     def test_wrong_create_token(self, login_scenarios):
         login = login_scenarios.wrong_create_token()

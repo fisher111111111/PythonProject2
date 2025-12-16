@@ -1,6 +1,7 @@
 import pytest
 import requests
 import allure
+
 from PythonProject2.src.utils_item.urls_item import ItemsURLs
 from PythonProject2.src.api.api_items import ItemsApi
 from PythonProject2.src.scenarios.scenario_items_valid import ItemScenarios
@@ -11,6 +12,7 @@ BASE_URL = ItemsURLs.base_url()
 ITEMS = ItemsURLs.items_endpoint()
 ITEM = ItemsURLs.items_endpoint_id
 LOGIN = ItemsURLs.auth_endpoint()
+
 
 """Фикстура для обработки объектов логина"""
 @allure.title("Фикстура получения сценариев для логина")

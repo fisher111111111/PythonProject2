@@ -1,6 +1,7 @@
+import allure
+
 from PythonProject2.src.enums_item.const_url import ConstURL, ApiHeaders
 from PythonProject2.src.item_models.data_model_items import AuthData,RequestItem
-import allure
 
 
 class ItemsApi:

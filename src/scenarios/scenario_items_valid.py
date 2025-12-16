@@ -1,7 +1,9 @@
 import requests
 import allure
+
 from PythonProject2.src.api.api_items import ItemsApi
 from PythonProject2.src.item_models.data_model_items import RequestItem
+
 
 class ItemScenarios:
     def __init__(self, token_session, api_client: ItemsApi):

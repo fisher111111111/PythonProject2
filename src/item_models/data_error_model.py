@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Union
 
+
 class Error400(BaseModel):
     detail: str="Incorrect email or password"
 

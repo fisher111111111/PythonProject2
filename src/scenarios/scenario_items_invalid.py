@@ -1,8 +1,10 @@
 import allure
+
 from PythonProject2.src.enums_item.const_url import ConstURL
 from PythonProject2.src.enums_item.invalid_data import WrongUUID
 from PythonProject2.src.item_models.data_model_items import AuthData,RequestItem, WrongRequestItems, NoneItems
 from PythonProject2.src.api.api_items import ItemsApi
+
 
 class BadScenarioCreate:
     def __init__(self,item_session):

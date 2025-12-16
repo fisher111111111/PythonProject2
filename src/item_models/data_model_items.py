@@ -7,12 +7,14 @@ from faker import Faker
 import os
 from dotenv import load_dotenv
 import allure
+
 from PythonProject2.src.enums_item.const_url import ConstURL, AuthHeaders
 
 load_dotenv()
 fake = Faker('ru_RU')
 BASE_URL = ConstURL.BASE_URL.value
 LOGIN_URL =  ConstURL.LOGIN_URL.value
+
 
 """Класс генерации авторизации"""
 class AuthData:
