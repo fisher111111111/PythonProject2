@@ -20,11 +20,8 @@ class TestValid:
     def test_create_check_item(self, valid_scenarios, cleanup_items):
         item_obj, item_id = valid_scenarios.create_check_item()
         json_item_obj = item_obj.json()
-        validate_item(
-            item_obj, model=ResponseItem, expected_data=json_item_obj
-        )
+        validate_item(item_obj, model=ResponseItem, expected_data=json_item_obj)
         cleanup_items.append(item_id)
-
 
     @allure.title("Тест на создание и удаление item")
     def test_create_delete_item(self, valid_scenarios):
@@ -43,9 +40,7 @@ class TestValid:
         obj1, id_obj1, obj2 = valid_scenarios.create_check_update_item()
         json_obj1 = obj1.json()
         json_obj2 = obj2.json()
-        validate_item(
-            obj2, model=ResponseItem, expected_data=json_obj2
-        )
+        validate_item(obj2, model=ResponseItem, expected_data=json_obj2)
         cleanup_items.append(id_obj1)
         assert (
             json_obj1["title"] != json_obj2["title"]
@@ -66,9 +61,7 @@ class TestValid:
         obj1, id_obj1, obj2 = valid_scenarios.create_check_get_item()
         json_obj1 = obj1.json()
         json_obj2 = obj2.json()
-        validate_item(
-            obj2, model=ResponseItem, expected_data=json_obj2
-        )
+        validate_item(obj2, model=ResponseItem, expected_data=json_obj2)
         cleanup_items.append(id_obj1)
         assert json_obj1 == json_obj2, "Тело item различается"
         assert obj2.status_code == 200, "Получен неожидаемый статус-код "

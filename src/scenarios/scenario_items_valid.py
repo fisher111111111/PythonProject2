@@ -1,6 +1,6 @@
-import allure
-
 import json
+
+import allure
 
 from PythonProject2.src.api.api_items import ItemsApi
 from PythonProject2.src.item_models.data_model_items import RequestItem
@@ -60,10 +60,7 @@ class ItemScenarios:
         # 1. Creating item
         with allure.step("Создание item и получение его ID"):
             response, id_item = self.create_check_item()
-            attach_data = {
-                "response": response.json(),
-                "id_item": id_item
-            }
+            attach_data = {"response": response.json(), "id_item": id_item}
             allure.attach(
                 json.dumps(attach_data, indent=2),
                 name="Созданный item и его ID",
@@ -87,10 +84,7 @@ class ItemScenarios:
         # 1. Creating item
         with allure.step("Создание item и получение его ID"):
             response, id_item = self.create_check_item()
-            attach_data = {
-                "response": response.json(),
-                "id_item": id_item
-            }
+            attach_data = {"response": response.json(), "id_item": id_item}
             allure.attach(
                 json.dumps(attach_data, indent=2),
                 name="Созданный item и его ID",
@@ -114,10 +108,7 @@ class ItemScenarios:
         # 1. Creating item
         with allure.step("Создание item и получение его ID"):
             response, id_item = self.create_check_item()
-            attach_data = {
-                "response": response.json(),
-                "id_item": id_item
-            }
+            attach_data = {"response": response.json(), "id_item": id_item}
             allure.attach(
                 json.dumps(attach_data, indent=2),
                 name="Созданный item и его ID",
@@ -144,10 +135,7 @@ class ItemScenarios:
         # 1. Creating item
         with allure.step("Создание item и получение его ID"):
             response, id_item = self.create_check_item()
-            attach_data = {
-                "response": response.json(),
-                "id_item": id_item
-            }
+            attach_data = {"response": response.json(), "id_item": id_item}
             allure.attach(
                 json.dumps(attach_data, indent=2),
                 name="Созданный item и его ID",

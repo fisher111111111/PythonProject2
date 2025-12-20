@@ -41,9 +41,10 @@ class TestInvalidCreate:
         assert data == "Not authenticated", "Получен неожидаемый текст"
         validate_error401(item_obj, model=Error401, expected_data=item_json)
 
+
 @allure.suite("Раздел Items")
 @allure.sub_suite("Негативные сценарии уже созданного item")
-class TestInvalidCreate:
+class TestInvalidItems:
 
     @allure.title(
         "Тест на создание item, а затем попытка его получения с пустым токеном"
@@ -79,7 +80,9 @@ class TestInvalidCreate:
 
     @allure.title("Тест на попытку повторного удаления item")
     def test_double_delete_item(self, invalid_item):
-        item_obj, id_item, delete_item, double_delete = invalid_item.double_delete_item()
+        item_obj, id_item, delete_item, double_delete = (
+            invalid_item.double_delete_item()
+        )
         json_delete_item = delete_item.json()
         json_double_delete = double_delete.json()
         data = json_double_delete["detail"]

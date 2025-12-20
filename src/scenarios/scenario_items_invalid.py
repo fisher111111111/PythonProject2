@@ -1,6 +1,6 @@
-import allure
-
 import json
+
+import allure
 
 from PythonProject2.src.api.api_items import ItemsApi
 from PythonProject2.src.enums_item.const_url import ConstURL
@@ -125,18 +125,14 @@ class BadScenariosItem:
         self.unreal_uuid = WrongUUID.UNREAL_ID.value
         self.item_valid_scenarios = ItemScenarios(item_session, api_client)
 
-
     @allure.title("Попытка получения без токена, созданного item")
     def create_and_get_empty_token(self):
         """Сценарий: создание итем, проверка ID созданного итем,
         затем удаление этого итем"""
         # 1. Creating valid item
         with allure.step("Создание item и получение его ID"):
-            response, id_item =  self.item_valid_scenarios.create_check_item()
-            attach_data = {
-                "response": response.json(),
-                "id_item": id_item
-            }
+            response, id_item = self.item_valid_scenarios.create_check_item()
+            attach_data = {"response": response.json(), "id_item": id_item}
             allure.attach(
                 json.dumps(attach_data, indent=2),
                 name="Созданный item и его ID",
@@ -169,10 +165,7 @@ class BadScenariosItem:
         затем удаление этого итем"""
         with allure.step("Создание item и получение его ID"):
             response, id_item = self.item_valid_scenarios.create_check_item()
-            attach_data = {
-                "response": response.json(),
-                "id_item": id_item
-            }
+            attach_data = {"response": response.json(), "id_item": id_item}
             allure.attach(
                 json.dumps(attach_data, indent=2),
                 name="Созданный item и его ID",
@@ -212,10 +205,7 @@ class BadScenariosItem:
         # 1. Creating valid item
         with allure.step("Создание item и получение его ID"):
             response, id_item = self.item_valid_scenarios.create_check_item()
-            attach_data = {
-                "response": response.json(),
-                "id_item": id_item
-            }
+            attach_data = {"response": response.json(), "id_item": id_item}
             allure.attach(
                 json.dumps(attach_data, indent=2),
                 name="Созданный item и его ID",
@@ -247,11 +237,13 @@ class BadScenariosItem:
         затем попытка повторно удалить итем"""
         # 1. Creating valid item
         with allure.step("Создание item и получение его ID"):
-            response, id_item, delete_item = self.item_valid_scenarios.create_check_delete_item()
+            response, id_item, delete_item = (
+                self.item_valid_scenarios.create_check_delete_item()
+            )
             attach_data = {
                 "response": response.json(),
                 "id_item": id_item,
-                "delete_item": delete_item.json()
+                "delete_item": delete_item.json(),
             }
             allure.attach(
                 json.dumps(attach_data, indent=3),
@@ -318,7 +310,7 @@ class BadScenariosItem:
         return response
 
     def delete_unreal_item(self):
-        """ Сценарий: создание итем,
+        """Сценарий: создание итем,
         затем удалить итем с несуществующим ID"""
         # 1. Deleting item with wrong ID
         with allure.step("Получаем токен для PUT запроса"):
