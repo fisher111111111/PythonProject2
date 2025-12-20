@@ -147,14 +147,26 @@ pytest
 ```bash
 python -m pytest tests -v -s --alluredir=allure-results
 ```
+
 Для получения отчета в Allure Report используйте команду:
 ```bash
 allure serve allure-results
 ```
+Для обновления отчетов в Allure Report перед запуском
+команды <span style="color: green;">python -m pytest tests -v -s --alluredir=allure-results</span> 
+очистите папку allure-results/ командой:
+#### for Windows :
+```bash
+Remove-Item allure-results* -Recurse -Force
+```  
+#### for Linux/macOS
+```bash
+rm -rf allure-results/*
+```
+ 
+
 
 ### Авторы
 **Рыбальченко Алексей**
 ### Контакты
-e-mail: [alexey_1979@mail.ru]()
-
 Telegram: [@Rybalchenko_Alexei]()

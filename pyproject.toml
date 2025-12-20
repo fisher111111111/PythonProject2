@@ -5,9 +5,10 @@ description = "Project for testing API of http://dashboard.fast-api.senior-pomid
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "allure>=2.35.1",
-    "dotenv>=1.1.1",
+    "allure-python-commons>=2.15.1",
+    "dotenv>=0.9.9",
     "faker>=37.3.0",
+    "pydantic>=2.12.5",
     "pytest>=8.3.5",
     "requests>=2.32.3",
 ]
