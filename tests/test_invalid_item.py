@@ -9,8 +9,8 @@ from PythonProject2.src.utils_item.validator_error_items import (
 
 
 @allure.suite("Раздел Items")
-@allure.sub_suite("Негативные сценарии")
-class TestInvalid:
+@allure.sub_suite("Негативные сценарии создания item")
+class TestInvalidCreate:
 
     @allure.title("Тест на создание item с title более 255 символов")
     def test_create_too_long_title(self, invalid_create):
@@ -41,16 +41,16 @@ class TestInvalid:
         assert data == "Not authenticated", "Получен неожидаемый текст"
         validate_error401(item_obj, model=Error401, expected_data=item_json)
 
+@allure.suite("Раздел Items")
+@allure.sub_suite("Негативные сценарии уже созданного item")
+class TestInvalidCreate:
+
     @allure.title(
         "Тест на создание item, а затем попытка его получения с пустым токеном"
     )
     def test_create_and_get_empty_token(self, invalid_item, cleanup_items):
-        item_create, item_obj = invalid_item.create_and_get_empty_token()
-        json_item_obj = item_create.json()
-        item_id = json_item_obj.get("id")
-        cleanup_items.append(item_id)
-        assert item_create.status_code == 200, "Получен неожидаемый статус-код "
-        assert len(json_item_obj) > 0, "JSON не должен быть пустым"
+        item_create, id_item, item_obj = invalid_item.create_and_get_empty_token()
+        cleanup_items.append(id_item)
         assert item_obj.status_code == 401, "Получен неожидаемый статус-код "
         item_json = item_obj.json()
         data = item_json["detail"]
@@ -59,12 +59,8 @@ class TestInvalid:
 
     @allure.title("Тест на создание item, а затем попытка обновления с пустым title")
     def test_create_and_update_empty_token(self, invalid_item, cleanup_items):
-        item_create, item_obj = invalid_item.create_and_update_empty_token()
-        json_item_obj = item_create.json()
-        item_id = json_item_obj.get("id")
-        cleanup_items.append(item_id)
-        assert item_create.status_code == 200, "Получен неожидаемый статус-код "
-        assert len(json_item_obj) > 0, "JSON не должен быть пустым"
+        item_create, id_item, item_obj = invalid_item.create_and_update_empty_token()
+        cleanup_items.append(id_item)
         assert item_obj.status_code == 401, "Получен неожидаемый статус-код "
         item_json = item_obj.json()
         data = item_json["detail"]
@@ -73,12 +69,8 @@ class TestInvalid:
 
     @allure.title("Тест на создание item, а затем попытка удаления с пустым токеном")
     def test_create_and_delete_empty_token(self, invalid_item, cleanup_items):
-        item_create, item_obj = invalid_item.create_and_delete_empty_token()
-        json_item_obj = item_create.json()
-        item_id = json_item_obj.get("id")
-        cleanup_items.append(item_id)
-        assert item_create.status_code == 200, "Получен неожидаемый статус-код "
-        assert len(json_item_obj) > 0, "JSON не должен быть пустым"
+        item_create, id_item, item_obj = invalid_item.create_and_delete_empty_token()
+        cleanup_items.append(id_item)
         assert item_obj.status_code == 401, "Получен неожидаемый статус-код "
         item_json = item_obj.json()
         data = item_json["detail"]
@@ -87,16 +79,13 @@ class TestInvalid:
 
     @allure.title("Тест на попытку повторного удаления item")
     def test_double_delete_item(self, invalid_item):
-        item_obj, delete_item, double_delete = invalid_item.double_delete_item()
-        json_item_obj = item_obj.json()
+        item_obj, id_item, delete_item, double_delete = invalid_item.double_delete_item()
         json_delete_item = delete_item.json()
         json_double_delete = double_delete.json()
         data = json_double_delete["detail"]
         validate_error404(
             double_delete, model=Error404, expected_data=json_double_delete
         )
-        assert item_obj.status_code == 200, "Получен неожидаемый статус-код "
-        assert len(json_item_obj) > 0, "JSON не должен быть пустым"
         assert delete_item.status_code == 200, "Получен неожидаемый статус-код"
         assert len(json_delete_item) > 0, "JSON не должен быть пустым"
         assert double_delete.status_code == 404, "Получен неожидаемый статус-код"

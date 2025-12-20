@@ -1,5 +1,7 @@
 import allure
 
+import json
+
 from PythonProject2.src.api.api_items import ItemsApi
 from PythonProject2.src.enums_item.const_url import ConstURL
 from PythonProject2.src.enums_item.invalid_data import WrongUUID
@@ -9,6 +11,7 @@ from PythonProject2.src.item_models.data_model_items import (
     RequestItem,
     WrongRequestItems,
 )
+from PythonProject2.src.scenarios.scenario_items_valid import ItemScenarios
 
 
 class BadScenarioCreate:
@@ -30,7 +33,7 @@ class BadScenarioCreate:
                 name="Полученный токен",
                 attachment_type=allure.attachment_type.TEXT,
             )
-        with allure.step("Получение данных длиннее > 255 символов"):
+        with allure.step("Создание данных длиннее > 255 символов"):
             item_create = self.wrong_data.too_long_data()
             allure.attach(
                 str(item_create),
@@ -120,24 +123,24 @@ class BadScenariosItem:
         self.token = AuthData().auth_token()
         self.empty_token = AuthData().empty_token()
         self.unreal_uuid = WrongUUID.UNREAL_ID.value
+        self.item_valid_scenarios = ItemScenarios(item_session, api_client)
+
 
     @allure.title("Попытка получения без токена, созданного item")
     def create_and_get_empty_token(self):
         """Сценарий: создание итем, проверка ID созданного итем,
         затем удаление этого итем"""
         # 1. Creating valid item
-        with allure.step("Создаем item"):
-            item_create = self.api_client.create_item()
+        with allure.step("Создание item и получение его ID"):
+            response, id_item =  self.item_valid_scenarios.create_check_item()
+            attach_data = {
+                "response": response.json(),
+                "id_item": id_item
+            }
             allure.attach(
-                str(item_create),
-                name="Полученный item",
-                attachment_type=allure.attachment_type.TEXT,
-            )
-        with allure.step("Забираем ID созданного item"):
-            json_item = item_create.json()
-            id_item = json_item.get("id")
-            allure.attach(
-                str(id_item), name="ID", attachment_type=allure.attachment_type.TEXT
+                json.dumps(attach_data, indent=2),
+                name="Созданный item и его ID",
+                attachment_type=allure.attachment_type.JSON,
             )
 
         # 2 Get item with empty token
@@ -149,42 +152,39 @@ class BadScenariosItem:
                 attachment_type=allure.attachment_type.TEXT,
             )
         with allure.step("Отправка GET запроса с пустым токеном"):
-            response = self.session.get(
+            empty_response = self.session.get(
                 f"{self.base_url}{id_item}", headers=empty_token.headers
             )
             allure.attach(
-                str(response),
+                str(empty_response),
                 name="результат GET запроса с пустым токеном",
                 attachment_type=allure.attachment_type.JSON,
             )
-        return item_create, response
+        return response, id_item, empty_response
 
     @allure.title("Попытка обновления без токена, созданного item")
     def create_and_update_empty_token(self):
         """
         Сценарий: создание итем, проверка ID созданного итем,
         затем удаление этого итем"""
-        # 1. Creating valid item
-        with allure.step("Создаем item"):
-            item_create = self.api_client.create_item()
+        with allure.step("Создание item и получение его ID"):
+            response, id_item = self.item_valid_scenarios.create_check_item()
+            attach_data = {
+                "response": response.json(),
+                "id_item": id_item
+            }
             allure.attach(
-                str(item_create),
-                name="Полученный item",
-                attachment_type=allure.attachment_type.TEXT,
-            )
-        with allure.step("Забираем ID созданного item"):
-            json_item = item_create.json()
-            id_item = json_item.get("id")
-            allure.attach(
-                str(id_item), name="ID", attachment_type=allure.attachment_type.TEXT
+                json.dumps(attach_data, indent=2),
+                name="Созданный item и его ID",
+                attachment_type=allure.attachment_type.JSON,
             )
 
-        # 2 Update item with empty token
+        # 2 Get item with empty token
         with allure.step("Получаем пустой токен"):
             empty_token = self.empty_token
             allure.attach(
                 str(empty_token),
-                name="Результат получения пустого токена",
+                name="результат получения пустого токена",
                 attachment_type=allure.attachment_type.TEXT,
             )
         with allure.step("Получаем данные для обновления item"):
@@ -193,38 +193,36 @@ class BadScenariosItem:
                 str(item_update), name="Результат получения данных для обновления item"
             )
         with allure.step("Отравляем запрос c пустым токен на обновление item"):
-            response = self.session.put(
+            empty_response = self.session.put(
                 f"{self.base_url}{id_item}",
                 headers=empty_token.headers,
                 json=item_update,
             )
             allure.attach(
-                str(response),
+                str(empty_response),
                 name="Результат запроса c пустым токен на обновление item",
                 attachment_type=allure.attachment_type.JSON,
             )
-        return item_create, response
+        return response, id_item, empty_response
 
     def create_and_delete_empty_token(self):
         """
         Сценарий: создание итем, проверка ID созданного итем,
         затем удаление этого итем"""
         # 1. Creating valid item
-        with allure.step("Создаем item"):
-            item_create = self.api_client.create_item()
+        with allure.step("Создание item и получение его ID"):
+            response, id_item = self.item_valid_scenarios.create_check_item()
+            attach_data = {
+                "response": response.json(),
+                "id_item": id_item
+            }
             allure.attach(
-                str(item_create),
-                name="Полученный item",
-                attachment_type=allure.attachment_type.TEXT,
-            )
-        with allure.step("Забираем ID созданного item"):
-            json_item = item_create.json()
-            id_item = json_item.get("id")
-            allure.attach(
-                str(id_item), name="ID", attachment_type=allure.attachment_type.TEXT
+                json.dumps(attach_data, indent=2),
+                name="Созданный item и его ID",
+                attachment_type=allure.attachment_type.JSON,
             )
 
-        # 2 Delete item with empty token
+        # 2 Get item with empty token
         with allure.step("Получаем пустой токен"):
             empty_token = self.empty_token
             allure.attach(
@@ -233,53 +231,43 @@ class BadScenariosItem:
                 attachment_type=allure.attachment_type.TEXT,
             )
         with allure.step("Отправка DELETE запроса с пустым токеном"):
-            response = self.session.delete(
+            empty_response = self.session.delete(
                 f"{self.base_url}{id_item}", headers=empty_token.headers
             )
             allure.attach(
-                str(response),
+                str(empty_response),
                 name="результат DELETE запроса с пустым токеном",
                 attachment_type=allure.attachment_type.JSON,
             )
-        return item_create, response
+        return response, id_item, empty_response
 
     @allure.title("Попытка повторного удаления item")
     def double_delete_item(self):
-        """Сценарий: создание итем, удаление итем,
+        """Сценарий: создание и удаление итем,
         затем попытка повторно удалить итем"""
         # 1. Creating valid item
-        with allure.step("Создаем item"):
-            item_create = self.api_client.create_item()
+        with allure.step("Создание item и получение его ID"):
+            response, id_item, delete_item = self.item_valid_scenarios.create_check_delete_item()
+            attach_data = {
+                "response": response.json(),
+                "id_item": id_item,
+                "delete_item": delete_item.json()
+            }
             allure.attach(
-                str(item_create),
-                name="Полученный item",
-                attachment_type=allure.attachment_type.JSON,
-            )
-        with allure.step("Забираем ID созданного item"):
-            json_item = item_create.json()
-            id_item = json_item.get("id")
-            allure.attach(
-                str(id_item), name="ID", attachment_type=allure.attachment_type.TEXT
-            )
-
-        # 2 Deleting item
-        with allure.step("Отправляем DELETE запрос "):
-            response = self.api_client.delete_item(id_item)
-            allure.attach(
-                str(response),
-                name="Результат удаления item",
+                json.dumps(attach_data, indent=3),
+                name="Созданный item и его ID",
                 attachment_type=allure.attachment_type.JSON,
             )
 
-        # 3 Deleting item one more
+        # 2 Take token for deleting item one more
         with allure.step("Получаем токен для повторного DELETE запроса"):
             token_item = self.token
             allure.attach(
                 str(token_item),
-                name="Результат удаления item",
+                name="токен для удаления item",
                 attachment_type=allure.attachment_type.JSON,
             )
-        with allure.step("Отправляем ПОВТРОНЫЙ DELETE запрос"):
+        with allure.step("Отправляем ПОВТОРНЫЙ DELETE запрос"):
             double_response = self.session.delete(
                 f"{self.base_url}{id_item}", headers=token_item.headers
             )
@@ -288,7 +276,7 @@ class BadScenariosItem:
                 name="Результат повторного удаления item",
                 attachment_type=allure.attachment_type.JSON,
             )
-        return item_create, response, double_response
+        return response, id_item, delete_item, double_response
 
     @allure.title("Попытка обновления item c несуществующим токеном")
     def update_unreal_item(self):
@@ -330,8 +318,7 @@ class BadScenariosItem:
         return response
 
     def delete_unreal_item(self):
-        """
-        Сценарий: создание итем,
+        """ Сценарий: создание итем,
         затем удалить итем с несуществующим ID"""
         # 1. Deleting item with wrong ID
         with allure.step("Получаем токен для PUT запроса"):

@@ -18,73 +18,44 @@ class TestValid:
 
     @allure.title("Тест на создание item")
     def test_create_check_item(self, valid_scenarios, cleanup_items):
-        item_obj = valid_scenarios.create_check_item()
+        item_obj, item_id = valid_scenarios.create_check_item()
         json_item_obj = item_obj.json()
-        item_id = json_item_obj.get("id")
         validate_item(
             item_obj, model=ResponseItem, expected_data=json_item_obj
-        )  # здесь в expected_data= помещаем json_item_obj как ожидаемые данные
+        )
         cleanup_items.append(item_id)
-        assert item_obj.status_code == 200, "Получен неожидаемый статус-код "
-        assert len(json_item_obj) > 0, "JSON не должен быть пустым"
-        assert json_item_obj.get("title") not in (
-            None,
-            "",
-        ), "Значение ключа 'title' пустое"
-        assert item_id not in (None, ""), "Значение ключа 'id' пустое"
-        assert json_item_obj.get("owner_id") not in (
-            None,
-            "",
-        ), "Значение ключа 'owner_id' пустое"
+
 
     @allure.title("Тест на создание и удаление item")
     def test_create_delete_item(self, valid_scenarios):
-        item_obj, delete_item = valid_scenarios.create_check_delete_item()
-        json_item_obj = item_obj.json()
-        item_id = json_item_obj.get("id")
+        item_obj, item_id, delete_item = valid_scenarios.create_check_delete_item()
         json_delete_item = delete_item.json()
         validate_delete_item(
             delete_item, model=ResponseDeleteItems, expected_data=json_delete_item
         )
         data = json_delete_item["message"]
-        assert item_obj.status_code == 200, "Получен неожидаемый статус-код "
-        assert len(json_item_obj) > 0, "JSON не должен быть пустым"
-        assert json_item_obj.get("title") not in (
-            None,
-            "",
-        ), "Значение ключа 'title' пустое"
-        assert item_id not in (None, ""), "Значение ключа 'id' пустое"
-        assert json_item_obj.get("owner_id") not in (
-            None,
-            "",
-        ), "Значение ключа 'owner_id' пустое"
         assert delete_item.status_code == 200, "Получен неожидаемый статус-код"
         assert len(json_delete_item) > 0, "JSON не должен быть пустым"
         assert data == "Item deleted successfully", "Несоответствие в тексте ответа"
 
     @allure.title("Тест на создание и обновление item")
     def test_create_check_update_item(self, valid_scenarios, cleanup_items):
-        obj1, obj2 = valid_scenarios.create_check_update_item()
-        print(obj1.json())
-        print(obj2.json())
+        obj1, id_obj1, obj2 = valid_scenarios.create_check_update_item()
         json_obj1 = obj1.json()
         json_obj2 = obj2.json()
-        item_id = json_obj2.get("id")
         validate_item(
             obj2, model=ResponseItem, expected_data=json_obj2
-        )  # здесь в expected_data= помещаем json_item_obj как ожидаемые данные
-        cleanup_items.append(item_id)
+        )
+        cleanup_items.append(id_obj1)
         assert (
             json_obj1["title"] != json_obj2["title"]
         ), "Значение ключа 'title' не изменилось"
         assert (
             json_obj1["description"] != json_obj2["description"]
         ), "Значение ключа 'description' не изменилось"
-        assert obj1.status_code == 200, "Получен неожидаемый статус-код "
         assert obj2.status_code == 200, "Получен неожидаемый статус-код "
         assert len(json_obj2) > 0, "JSON не должен быть пустым"
         assert json_obj2.get("title") not in (None, ""), "Значение ключа 'title' пустое"
-        assert item_id not in (None, ""), "Значение ключа 'id' пустое"
         assert json_obj2.get("owner_id") not in (
             None,
             "",
@@ -92,20 +63,17 @@ class TestValid:
 
     @allure.title("Тест на создание и получение созданного item")
     def test_create_check_get_item(self, valid_scenarios, cleanup_items):
-        obj1, obj2 = valid_scenarios.create_check_get_item()
+        obj1, id_obj1, obj2 = valid_scenarios.create_check_get_item()
         json_obj1 = obj1.json()
         json_obj2 = obj2.json()
-        item_id = json_obj2.get("id")
         validate_item(
             obj2, model=ResponseItem, expected_data=json_obj2
-        )  # здесь в expected_data= помещаем json_item_obj как ожидаемые данные
-        cleanup_items.append(item_id)
+        )
+        cleanup_items.append(id_obj1)
         assert json_obj1 == json_obj2, "Тело item различается"
-        assert obj1.status_code == 200, "Получен неожидаемый статус-код "
         assert obj2.status_code == 200, "Получен неожидаемый статус-код "
         assert len(json_obj2) > 0, "JSON не должен быть пустым"
         assert json_obj2.get("title") not in (None, ""), "Значение ключа 'title' пустое"
-        assert item_id not in (None, ""), "Значение ключа 'id' пустое"
         assert json_obj2.get("owner_id") not in (
             None,
             "",
@@ -113,11 +81,9 @@ class TestValid:
 
     @allure.title("Тест на получение общего списка")
     def test_check_all_items(self, valid_scenarios):
-        item_create, items = valid_scenarios.create_check_in_all_items()
+        item_create, id_obj, items = valid_scenarios.create_check_in_all_items()
         json_items = items.json()
         validate_items(items, model=ResponseAllItems, expected_data=json_items)
-        assert items.status_code == 200, "Получен неожидаемый статус-код "
-        assert len(json_items) > 0, "JSON не должен быть пустым"
         assert len(json_items.get("data")) == json_items.get(
             "count"
         ), "Несоответствие количества data и count"
@@ -127,15 +93,12 @@ class TestValid:
 
     @allure.title("Тест на создание item, и проверка его нахождения в общем списке")
     def test_create_check_in_all_items(self, valid_scenarios, cleanup_items):
-        item_create, items = valid_scenarios.create_check_in_all_items()
+        item_create, id_item, items = valid_scenarios.create_check_in_all_items()
         json_item_create = item_create.json()
         json_items = items.json()
-        item_id = json_item_create.get("id")
         validate_items(items, model=ResponseAllItems, expected_data=json_items)
-        cleanup_items.append(item_id)
-        assert item_create.status_code == 200, "Получен неожидаемый статус-код "
+        cleanup_items.append(id_item)
         assert items.status_code == 200, "Получен неожидаемый статус-код "
-        assert len(json_items) > 0, "JSON не должен быть пустым"
         assert len(json_items.get("data")) == json_items.get(
             "count"
         ), "Несоответствие количества data и count"

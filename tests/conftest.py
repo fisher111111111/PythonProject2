@@ -11,7 +11,6 @@ from PythonProject2.src.scenarios.scenario_items_invalid import (
 from PythonProject2.src.scenarios.scenario_items_valid import ItemScenarios
 from PythonProject2.src.utils_item.urls_item import ItemsURLs
 
-
 BASE_URL = ItemsURLs.base_url()
 ITEMS = ItemsURLs.items_endpoint()
 ITEM = ItemsURLs.items_endpoint_id
