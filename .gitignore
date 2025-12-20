@@ -4,5 +4,5 @@
 .idea/
 __pycache__/
 *.pyc
-.allure-results/
+allure-results/
 __init__.py
