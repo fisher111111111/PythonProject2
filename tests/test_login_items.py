@@ -7,7 +7,6 @@ from PythonProject2.src.utils_item.validator_item_data import validator_login
 @allure.suite("Раздел Авторизация")
 @allure.sub_suite("Позитивные сценарии")
 class TestValidLogin:
-
     @allure.title("Тест на создание item")
     def test_create_token(self, login_scenarios):
         login = login_scenarios.create_token()

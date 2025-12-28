@@ -237,9 +237,11 @@ class BadScenariosItem:
         затем попытка повторно удалить итем"""
         # 1. Creating valid item
         with allure.step("Создание item и получение его ID"):
-            response, id_item, delete_item = (
-                self.item_valid_scenarios.create_check_delete_item()
-            )
+            (
+                response,
+                id_item,
+                delete_item,
+            ) = self.item_valid_scenarios.create_check_delete_item()
             attach_data = {
                 "response": response.json(),
                 "id_item": id_item,

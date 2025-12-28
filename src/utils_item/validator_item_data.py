@@ -17,7 +17,6 @@ def validate_item(
     expected_data: dict,
     expected_status: int = 200,
 ) -> BaseModel:
-
     if response.status_code != expected_status:
         pytest.fail(
             f"Ожидался статус {expected_status}, но получен {response.status_code}: {response.text}"
@@ -53,7 +52,6 @@ def validate_delete_item(
     expected_data: dict,
     expected_status: int = 200,
 ) -> BaseModel:
-
     if response.status_code != expected_status:
         pytest.fail(
             f"Ожидался статус {expected_status}, но получен {response.status_code}: {response.text}"
@@ -89,7 +87,6 @@ def validator_login(
     expected_data: dict,
     expected_status: int = 200,
 ) -> BaseModel:
-
     if response.status_code != expected_status:
         pytest.fail(
             f"Ожидался статус {expected_status}, но получен {response.status_code}: {response.text}"

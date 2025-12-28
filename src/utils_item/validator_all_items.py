@@ -13,7 +13,6 @@ def validate_items(
     expected_data: dict,
     expected_status: int = 200,
 ) -> BaseModel:
-
     # Проверка статуса ответа
     if response.status_code != expected_status:
         pytest.fail(

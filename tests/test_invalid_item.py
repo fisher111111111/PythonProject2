@@ -11,7 +11,6 @@ from PythonProject2.src.utils_item.validator_error_items import (
 @allure.suite("Раздел Items")
 @allure.sub_suite("Негативные сценарии создания item")
 class TestInvalidCreate:
-
     @allure.title("Тест на создание item с title более 255 символов")
     def test_create_too_long_title(self, invalid_create):
         item_obj = invalid_create.create_too_long_title()
@@ -45,7 +44,6 @@ class TestInvalidCreate:
 @allure.suite("Раздел Items")
 @allure.sub_suite("Негативные сценарии уже созданного item")
 class TestInvalidItems:
-
     @allure.title(
         "Тест на создание item, а затем попытка его получения с пустым токеном"
     )
@@ -80,9 +78,12 @@ class TestInvalidItems:
 
     @allure.title("Тест на попытку повторного удаления item")
     def test_double_delete_item(self, invalid_item):
-        item_obj, id_item, delete_item, double_delete = (
-            invalid_item.double_delete_item()
-        )
+        (
+            item_obj,
+            id_item,
+            delete_item,
+            double_delete,
+        ) = invalid_item.double_delete_item()
         json_delete_item = delete_item.json()
         json_double_delete = double_delete.json()
         data = json_double_delete["detail"]

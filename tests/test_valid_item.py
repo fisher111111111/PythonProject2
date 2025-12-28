@@ -15,7 +15,6 @@ from PythonProject2.src.utils_item.validator_item_data import (
 @allure.suite("Раздел Items")
 @allure.sub_suite("Позитивные сценарии")
 class TestValid:
-
     @allure.title("Тест на создание item")
     def test_create_check_item(self, valid_scenarios, cleanup_items):
         item_obj, item_id = valid_scenarios.create_check_item()

@@ -18,7 +18,6 @@ def validate_error422(
     expected_data: dict,
     expected_status: int = 422,
 ) -> BaseModel:
-
     if response.status_code != expected_status:
         pytest.fail(
             f"Ожидался статус {expected_status}, но получен {response.status_code}: {response.text}"
@@ -54,7 +53,6 @@ def validate_error400(
     expected_data: dict,
     expected_status: int = 400,
 ) -> BaseModel:
-
     if response.status_code != expected_status:
         pytest.fail(
             f"Ожидался статус {expected_status}, но получен {response.status_code}: {response.text}"
@@ -90,7 +88,6 @@ def validate_error401(
     expected_data: dict,
     expected_status: int = 401,
 ) -> BaseModel:
-
     if response.status_code != expected_status:
         pytest.fail(
             f"Ожидался статус {expected_status}, но получен {response.status_code}: {response.text}"
@@ -126,7 +123,6 @@ def validate_error404(
     expected_data: dict,
     expected_status: int = 404,
 ) -> BaseModel:
-
     if response.status_code != expected_status:
         pytest.fail(
             f"Ожидался статус {expected_status}, но получен {response.status_code}: {response.text}"
