@@ -312,7 +312,7 @@ class BadScenariosItem:
     def delete_unreal_item(self):
         """Сценарий: создание итем,
         затем удалить итем с несуществующим ID"""
-        # 1. Deleting item with wrong ID
+        # 1. Delete item with wrong ID
         with allure.step("Получаем токен для PUT запроса"):
             token_item = self.token
             allure.attach(
