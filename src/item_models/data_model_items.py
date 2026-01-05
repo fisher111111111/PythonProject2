@@ -58,24 +58,6 @@ class AuthData:
         token_session.headers.update({"Authorization": f"Bearer {items_token}"})
         return token_session
 
-    @allure.title("Получение токена для сессии")
-    def valid_token(self):
-        """Создание сессию с авторизацией"""
-        token_session = requests.Session()
-        auth_data = AuthHeaders.AUTH_DATA.value
-        auth_headers = AuthHeaders.AUTH_HEADERS.value
-        response = token_session.post(LOGIN_URL, headers=auth_headers, data=auth_data)
-        allure.attach(
-            str(response),
-            name="Данные для получения токена",
-            attachment_type=allure.attachment_type.JSON,
-        )
-        response.raise_for_status()
-        items_token = response.json()["access_token"]
-        token_session.headers.update({"Authorization": f"Bearer {items_token}"})
-        token_valid = token_session.headers
-        return token_valid
-
     @allure.title("Создание сессии без токена")
     def empty_token(self):
         """Создание сессию с авторизацией"""
@@ -116,7 +98,7 @@ class RequestItem(BaseModel):
         )
         allure.attach(
             str(object_item),
-            name="Данные для создани item",
+            name="Данные для создания item",
             attachment_type=allure.attachment_type.JSON,
         )
         return object_item.model_dump()
