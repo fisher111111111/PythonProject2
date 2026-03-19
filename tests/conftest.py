@@ -26,7 +26,11 @@ LOGIN = ItemsURLs.auth_endpoint()
 def login_scenarios():
     session = requests.Session()
     api_login = AuthLogin(session)
-    return api_login
+    yield api_login
+    session.close()
+
+
+# return api_login
 
 
 """Фикстуры для создания объектов классов сценариев"""
