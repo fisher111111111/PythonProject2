@@ -42,7 +42,8 @@ def valid_scenarios():
     session = requests.Session()
     api_client = ItemsApi(session)
     scenarios = ItemScenarios(session, api_client)
-    return scenarios
+    yield scenarios
+    session.close()
 
 
 @allure.title("Фикстура получения невалидных сценариев получения item")
@@ -50,7 +51,8 @@ def valid_scenarios():
 def invalid_create():
     session = requests.Session()
     scenarios = BadScenarioCreate(session)
-    return scenarios
+    yield scenarios
+    session.close()
 
 
 @allure.title("Фикстура получения невалидных сценариев работы с полученным item")
@@ -59,7 +61,8 @@ def invalid_item():
     session = requests.Session()
     api_client = ItemsApi(session)
     scenarios = BadScenariosItem(session, api_client)
-    return scenarios
+    yield scenarios
+    session.close()
 
 
 @allure.title("Фикстура удаления item")
@@ -72,3 +75,4 @@ def cleanup_items():
     for item_id in item_ids:  # после теста удаляем все item по id
         delete_response = api_client.delete_item(item_id)
         assert delete_response.status_code == 200
+    session.close()
