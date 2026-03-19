@@ -1,9 +1,11 @@
 import allure
+import pytest
 
 from PythonProject2.src.item_models.data_model_items import ResponseLogin
 from PythonProject2.src.utils_item.validator_item_data import validator_login
 
 
+@pytest.mark.login
 @allure.suite("Раздел Авторизация")
 @allure.sub_suite("Позитивные сценарии")
 class TestValidLogin:

@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 from PythonProject2.src.item_models.data_error_model import Error401, Error404, Error422
 from PythonProject2.src.utils_item.validator_error_items import (
@@ -8,6 +9,7 @@ from PythonProject2.src.utils_item.validator_error_items import (
 )
 
 
+@pytest.mark.items
 @allure.suite("Раздел Items")
 @allure.sub_suite("Негативные сценарии создания item")
 class TestInvalidCreate:

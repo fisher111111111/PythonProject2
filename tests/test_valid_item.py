@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 from PythonProject2.src.item_models.data_model_items import (
     ResponseAllItems,
@@ -12,6 +13,7 @@ from PythonProject2.src.utils_item.validator_item_data import (
 )
 
 
+@pytest.mark.items
 @allure.suite("Раздел Items")
 @allure.sub_suite("Позитивные сценарии")
 class TestValid:

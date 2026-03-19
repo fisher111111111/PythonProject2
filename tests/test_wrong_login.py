@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 from PythonProject2.src.item_models.data_error_model import Error400, Error422
 from PythonProject2.src.utils_item.validator_error_items import (
@@ -7,6 +8,7 @@ from PythonProject2.src.utils_item.validator_error_items import (
 )
 
 
+@pytest.mark.login
 @allure.suite("Раздел Авторизация")
 @allure.sub_suite("Негативные сценарии")
 class TestInvalidLogin:
